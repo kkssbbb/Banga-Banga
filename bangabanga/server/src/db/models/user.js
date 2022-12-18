@@ -45,7 +45,7 @@ module.exports = class User extends Sequelize.Model {
           type: DataTypes.ENUM("10대", "20대", "30대", "40대"),
           allowNull: true,
         },
-        Mbti: {
+        mbti: {
           type: DataTypes.STRING(200),
           allowNull: true,
         },
@@ -104,7 +104,7 @@ module.exports = class User extends Sequelize.Model {
   }
   static associate(db) {
     db.User.hasMany(db.Matching, {
-      foreignkey: "userId",
+      foreignkey: "create_id",
       sourceKey: "user_id",
       onUpdate: "cascade",
     });

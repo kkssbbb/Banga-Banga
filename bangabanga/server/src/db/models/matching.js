@@ -35,7 +35,7 @@ module.exports = class Matching extends Sequelize.Model {
   }
   static associate(db) {
     db.Matching.belongsTo(db.User, {
-      foreignkey: "userId",
+      foreignkey: "create_id",
       sourceKey: "user_id",
       onUpdate: "cascade",
     });
