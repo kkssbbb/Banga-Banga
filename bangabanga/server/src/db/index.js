@@ -1,11 +1,11 @@
 'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
-const User = require('./user');
+const User = require('./models/user');
+const Matching = require('./models/matching');
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
@@ -34,9 +34,16 @@ Object.keys(db).forEach(modelName => {
 });
 
 db.sequelize = sequelize;
+
 db.Sequelize = Sequelize;
+
 db.User = User;
+db.Matching = Matching;
 
 User.init(sequelize);
+Matching.init(sequelize);
+
+User.associate(db);
+Matching.associate(db);
 
 module.exports = db;
