@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "nattyking",
+    "password": "s1h1o1c1k1",
+    "database": "bangadb",
+    "host": "bangabanga-mysql.cq4xmdifzmgh.ap-northeast-2.rds.amazonaws.com",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
