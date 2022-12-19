@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start2": "node ./bin/www",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js --exec babel-node"
   },
   "dependencies": {
     "@babel/core": "^7.20.5",

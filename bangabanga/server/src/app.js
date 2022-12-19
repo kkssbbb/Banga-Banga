@@ -1,7 +1,7 @@
-const express = require("express");
-const errorHandler = require('./middlewares/error-handler')
+import express from "express";
+import { errorHandler } from "./middlewares";
+import { usersRouter } from "./routers";
 const app = express();
-const usersRouter = require('./routers/user-router')
 /* GET home page. */
 
 app.get("/", async function (req, res, next) {
@@ -19,8 +19,8 @@ app.use(express.urlencoded({ extended: false }));
 // html, css, js 라우팅
 // app.use(viewsRouter);
 
-app.use('/api/users', usersRouter);
+app.use("/api/Users", usersRouter);
 // app.use('/api/matchings', matchingsRouter);
 app.use(errorHandler);
 
-module.exports = app;
+export { app };

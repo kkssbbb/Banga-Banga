@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
-module.exports = class Matching extends Sequelize.Model {
+class Matching extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
@@ -40,4 +40,5 @@ module.exports = class Matching extends Sequelize.Model {
       onUpdate: "cascade",
     });
   }
-};
+}
+export { Matching };

@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
-module.exports = class User extends Sequelize.Model {
+class User extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
@@ -102,7 +102,7 @@ module.exports = class User extends Sequelize.Model {
       }
     );
   }
-  
+
   static associate(db) {
     db.User.hasMany(db.Matching, {
       foreignkey: "create_id",
@@ -110,4 +110,5 @@ module.exports = class User extends Sequelize.Model {
       onUpdate: "cascade",
     });
   }
-};
+}
+export { User };

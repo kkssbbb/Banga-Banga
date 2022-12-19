@@ -1,16 +1,15 @@
-const express = require('express')
-const router = express.Router();
-const userService = require('../services/user-service');
+import { Router } from "express";
+import { userService } from "../services";
 
-const usersRouter = router
+const usersRouter = Router();
 
-usersRouter.get('/', async(req, res, next)=>{
-    try{
-        const users = await userService.getUsers();
-        res.status(200).json(users);
-    }catch(error){
-        next(error);
-    }
+usersRouter.get("/", async (req, res, next) => {
+  try {
+    const users = await userService.getUsers();
+    res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
 });
 
-module.exports = usersRouter;
+export { usersRouter };

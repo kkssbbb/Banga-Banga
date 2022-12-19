@@ -1,7 +1,8 @@
-const User = require("../db/models/user");
-const Sequelize = require("sequelize");
-const { QueryTypes } = require("sequelize");
-const { sequelize } = require("../db/index");
+import { Sequelize } from "sequelize";
+import { User } from "../db/models";
+import { QueryTypes } from "sequelize";
+import { sequelize } from "../db/index";
+// const { sequelize } = require("../db/index");
 
 class UserService {
   constructor(model) {
@@ -10,10 +11,10 @@ class UserService {
 
   async getUsers() {
     const query = `SELECT * FROM Users`;
-    const users = await sequelize.query(query, {type : QueryTypes.SELECT});
+    const users = await sequelize.query(query, { type: QueryTypes.SELECT });
     return users;
   }
 }
 const userService = new UserService(User);
 
-module.exports = userService;
+export { userService };
