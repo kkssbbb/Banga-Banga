@@ -2,7 +2,7 @@
 import Sequelize from "sequelize";
 import { User, Matching } from "./models";
 const env = process.env.NODE_ENV || "development"; //개발용 환경 설정 배포 시 production으로 바꾸면 됨
-const config = require("../config/config.json")[env]; //Sequelize 설정 파일
+const config = require("../config/config.js")[env]; //Sequelize 설정 파일
 const db = {};
 
 let sequelize;
