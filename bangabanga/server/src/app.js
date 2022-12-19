@@ -1,7 +1,11 @@
 import express from "express";
 import { errorHandler } from "./middlewares";
-import { usersRouter } from "./routers";
+import { usersRouter,metchingPostRouter } from "./routers";
+import { sequelize } from "./db";
+
+
 const app = express();
+sequelize.sync();
 /* GET home page. */
 
 app.get("/", async function (req, res, next) {
@@ -20,7 +24,9 @@ app.use(express.urlencoded({ extended: false }));
 // app.use(viewsRouter);
 
 app.use("/api/Users", usersRouter);
-// app.use('/api/matchings', matchingsRouter);
+app.use('/api/matching-posts', metchingPostRouter);
+
+
 app.use(errorHandler);
 
 export { app };
