@@ -16,7 +16,17 @@ class MetchingPostService {
     return posts;
   }
 
+// 본인 게시글만 조회
+async getUserPosts(userId){
+  
+    const query = `select * from MatchingPost
+    where user_id =${userId};`
 
+    const userPosts = await sequelize.query(query,{type: QueryTypes.SELECT})
+    console.log(userPosts);
+    
+    return userPosts
+}
 
 
 //모집 게시글 작성

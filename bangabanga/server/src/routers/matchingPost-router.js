@@ -19,10 +19,11 @@ metchingPostRouter.get("/", async (req, res, next) => {
 
 
 
-//본인 게시글만 조회 미완성
-metchingPostRouter.get("/213", async (req, res, next) => {
+//본인 게시글만 조회
+metchingPostRouter.get("/:user_id", async (req, res, next) => {
     try {
-      const userPosts = await postService.getPost();
+        const userId = req.params.user_id;
+      const userPosts = await metchingPostService.getUserPosts(userId);
       res.status(200).json(userPosts);
 
     } catch (error) {
