@@ -22,10 +22,11 @@ if (config.use_env_variable) {
 db.sequelize = sequelize; //db객체에 sequelize 인스턴스 넣기
 db.Sequelize = Sequelize; //db객체에 Sequelize 패키지 넣기
 
-
+db.User = User;
 db.MatchingPosts = MatchingPosts;
 
 // User.init(sequelize);
+User.init(sequelize);
 MatchingPosts.init(sequelize);
 
 // User.associate(db);
