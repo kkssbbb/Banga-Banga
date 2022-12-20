@@ -89,6 +89,7 @@ class User extends Sequelize.Model {
         is_withdrawal: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
+          defaultValue: 0,
         },
       },
       {
