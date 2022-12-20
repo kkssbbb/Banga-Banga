@@ -9,6 +9,7 @@ class MetchingPostService {
     this.MatchingPosts = model;
   }
 
+
   //전체 게시글 조회
   async getPosts() {
     const query = `select * from MatchingPost;`;
@@ -23,11 +24,23 @@ async getUserPosts(userId){
     where user_id =${userId};`
 
     const userPosts = await sequelize.query(query,{type: QueryTypes.SELECT})
-    console.log(userPosts);
-    
+   
+
     return userPosts
 }
 
+//클릭한 게시글 조회
+async getClickPost(postId){
+  
+
+   
+    const result=  MatchingPosts.findOne({where: {MatchingPosts_id:postId}})
+    .then(MatchingPosts => MatchingPosts.increment('view',{view:1}) );
+ 
+    return result
+    
+    
+}
 
 //모집 게시글 작성
 async postPost(postContent){

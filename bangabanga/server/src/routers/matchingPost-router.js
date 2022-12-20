@@ -5,6 +5,7 @@ const metchingPostRouter = Router();
 
 
 
+
 //게시글 전체 조회
 metchingPostRouter.get("/", async (req, res, next) => {
    
@@ -30,6 +31,24 @@ metchingPostRouter.get("/:user_id", async (req, res, next) => {
       next(error);
     }
   });
+
+//클릭한 게시글 조회
+metchingPostRouter.get("/read-post/:MatchingPosts_id", async(req,res,next)=>{
+  console.log('test22');
+  
+  try {
+      const postId = req.params.MatchingPosts_id;
+      const clickPost = await metchingPostService.getClickPost(postId)
+
+      
+      res.status(200).json(clickPost);
+
+    
+  } catch (error) {
+    
+  }
+})
+
 
   //모집 게시글 쓰기 
   metchingPostRouter.post("/", async (req, res, next) => {

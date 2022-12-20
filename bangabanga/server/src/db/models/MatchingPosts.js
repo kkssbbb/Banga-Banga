@@ -42,7 +42,12 @@ class MatchingPosts extends Sequelize.Model {
       comment: "접선시간",
       allowNull: false,//필수
     },
-
+    view: {
+      type: DataTypes.INTEGER,
+      comment: "조회수",
+      defaultValue: 0
+      
+    }
  
  
   },
