@@ -6,12 +6,14 @@ const metchingPostRouter = Router();
 
 
 
-//게시글 전체 조회
-metchingPostRouter.get("/", async (req, res, next) => {
+//게시글 전체 조회 (게시글 6개 페이지네이션)
+metchingPostRouter.get("/:page", async (req, res, next) => {
    
     
   try {
-    const posts = await metchingPostService.getPosts();
+    let page = req.params.page;
+    let offset = 0;
+    const posts = await metchingPostService.getPosts(page,offset);
     res.status(200).json(posts);
   } catch (error) {
     next(error);

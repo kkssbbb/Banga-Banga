@@ -1,6 +1,6 @@
 "use strict";
 import Sequelize from "sequelize";
-import { User, MatchingPosts } from "./models";
+import { User, MatchingPosts,MatchingSituation, CafeInformation,OperationInformation} from "./models";
 
 
 const env = process.env.NODE_ENV || "development"; //개발용 환경 설정 배포 시 production으로 바꾸면 됨
@@ -24,10 +24,18 @@ db.Sequelize = Sequelize; //db객체에 Sequelize 패키지 넣기
 
 db.User = User;
 db.MatchingPosts = MatchingPosts;
+db.MatchingSituation =MatchingSituation;
+db.CafeInformation =CafeInformation;
+db.OperationInformation =OperationInformation;
+
 
 // User.init(sequelize);
 User.init(sequelize);
-MatchingPosts.init(sequelize);
+MatchingPosts.init(sequelize); 
+MatchingSituation.init(sequelize); 
+CafeInformation.init(sequelize); 
+OperationInformation.init(sequelize); 
+
 
 // User.associate(db);
 //MatchingPosts.associate(db);
