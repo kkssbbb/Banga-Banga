@@ -12,6 +12,7 @@ class User extends Sequelize.Model {
         role: {
           type: DataTypes.STRING(100),
           allowNull: false,
+          defaultValue: "일반회원",
         },
         user_name: {
           type: DataTypes.STRING(100),
@@ -24,6 +25,9 @@ class User extends Sequelize.Model {
         email: {
           type: DataTypes.STRING(100),
           allowNull: false,
+          validate: {
+            isEmail: true,
+          },
         },
         nick_name: {
           type: DataTypes.STRING(200),
@@ -64,12 +68,17 @@ class User extends Sequelize.Model {
         rating_score: {
           type: DataTypes.INTEGER,
           allowNull: false,
-          defaultValue: 100,
+          defaultValue: 0,
+        },
+        tier: {
+          type: DataTypes.STRING(20),
+          allowNull: false,
+          defaultValue: "bronze",
         },
         escape_score: {
           type: DataTypes.INTEGER,
           allowNull: false,
-          defaultValue: 100,
+          defaultValue: 0,
         },
         matching_count: {
           type: DataTypes.INTEGER,
@@ -79,17 +88,12 @@ class User extends Sequelize.Model {
         manner_evaluate: {
           type: DataTypes.INTEGER,
           allowNull: false,
-          defaultValue: 0,
+          defaultValue: 50,
         },
         created_date: {
           type: DataTypes.DATE,
           allowNull: false,
           defaultValue: Sequelize.fn("now"),
-        },
-        is_withdrawal: {
-          type: DataTypes.BOOLEAN,
-          allowNull: false,
-          defaultValue: 0,
         },
       },
       {
@@ -100,16 +104,17 @@ class User extends Sequelize.Model {
         collate: "utf8_general_ci", // 한국어 설정
         tableName: "Users",
         modelName: "User",
+        paranoid: true,
       }
     );
   }
 
-  static associate(db) {
-    db.User.hasMany(db.Matching, {
-      foreignkey: "create_id",
-      sourceKey: "user_id",
-      onUpdate: "cascade",
-    });
-  }
+  // static associate(db) {
+  //   db.User.hasMany(db.Matching, {
+  //     foreignkey: "create_id",
+  //     sourceKey: "user_id",
+  //     onUpdate: "cascade",
+  //   });
+  // }
 }
 export { User };
