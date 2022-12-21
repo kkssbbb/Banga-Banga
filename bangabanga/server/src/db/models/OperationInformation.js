@@ -55,7 +55,16 @@ class OperationInformation extends Sequelize.Model {
       }
     );
   }
-  // static associate() {}
+  //관계 설정
+  // 모집글>카페정보<카페운영정보
+  static associate(db) {
+    db.OperationInformation.belongsTo(db.CafeInformation, {
+      foreignKey: "cafe_id",
+      sourceKey: "cafe_id",
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    });
+  }
 }
 
 export { OperationInformation };
