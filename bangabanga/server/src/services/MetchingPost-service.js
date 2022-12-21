@@ -9,10 +9,16 @@ class MetchingPostService {
     this.MatchingPosts = model;
   }
 
-  //전체 게시글 조회
-  async getPosts() {
+  //전체 게시글 조회  게시글 6개로 페이지네이션
+  async getPosts(page, offset) {
+    console.log(page,offset);
+    
+    if (page >= 1) {
+      offset = 6 * (page - 1);
+    }
     const query = `select * from MatchingPost;`;
-    const posts = await sequelize.query(query, { type: QueryTypes.SELECT });
+    const posts = await MatchingPosts.findAll({ 
+        offset: offset, limit: 6 }); //페이지네이션
     return posts;
   }
 
@@ -22,9 +28,17 @@ class MetchingPostService {
     where user_id =${userId};`;
 
     const userPosts = await sequelize.query(query, { type: QueryTypes.SELECT });
-    console.log(userPosts);
 
     return userPosts;
+  }
+
+  //클릭한 게시글 조회
+  async getClickPost(postId) {
+    const result = MatchingPosts.findOne({
+      where: { MatchingPosts_id: postId },
+    }).then((MatchingPosts) => MatchingPosts.increment("view", { view: 1 }));
+
+    return result;
   }
 
   //모집 게시글 작성
