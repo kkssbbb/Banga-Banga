@@ -1,8 +1,12 @@
 import express from "express";
 import { errorHandler } from "./middlewares";
-import { usersRouter,metchingPostRouter } from "./routers";
+import {
+  usersRouter,
+  metchingPostRouter,
+  cafeInformationRouter,
+} from "./routers";
 import { sequelize } from "./db";
-import cors from 'cors';
+import cors from "cors";
 
 const app = express();
 sequelize.sync();
@@ -24,8 +28,8 @@ app.use(express.urlencoded({ extended: false }));
 // app.use(viewsRouter);
 
 app.use("/api/Users", usersRouter);
-app.use('/api/matching-posts', metchingPostRouter);
-
+app.use("/api/matching-posts", metchingPostRouter);
+app.use("/api/cafe-infos", cafeInformationRouter);
 
 app.use(errorHandler);
 

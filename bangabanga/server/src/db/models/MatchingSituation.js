@@ -15,7 +15,12 @@ class MatchingSituation extends Sequelize.Model {
           defaultValue: 0,
           commet: "모집현황 수",
         },
-        is_finish: {
+        participants_id:{
+          type: DataTypes.INTEGER,
+          defaultValue: 0,
+          commet: "모집현황 수",
+        },
+        is_evaluate: {
           type: DataTypes.BOOLEAN,
           defaultValue: false,
           comment: "평가 완료 여부",
