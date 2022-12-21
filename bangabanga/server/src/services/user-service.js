@@ -2,18 +2,17 @@
 import { User } from "../db/models";
 import { sequelize } from "../db/index";
 import bcrypt from "bcrypt";
-
+import jwt from "jsonwebtoken";
 class UserService {
   constructor(model) {
     this.User = model;
   }
   //회원가입
   async addUser(user) {
-    const { role, user_name, mobile_number, email, nick_name, password } = user;
+    const { user_name, mobile_number, email, nick_name, password } = user;
     console.log(user);
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUserInfo = {
-      role,
       user_name,
       mobile_number,
       email,

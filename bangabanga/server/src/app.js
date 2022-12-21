@@ -2,7 +2,7 @@ import express from "express";
 import { errorHandler } from "./middlewares";
 import { usersRouter,metchingPostRouter } from "./routers";
 import { sequelize } from "./db";
-
+import cors from 'cors';
 
 const app = express();
 sequelize.sync();
@@ -12,7 +12,7 @@ app.get("/", async function (req, res, next) {
   res.send("hello, wolrd!");
 });
 // CORS 에러 방지
-// app.use(cors());
+app.use(cors());
 
 // Content-Type: application/json 형태의 데이터를 인식하고 핸들링할 수 있게 함.
 app.use(express.json());
