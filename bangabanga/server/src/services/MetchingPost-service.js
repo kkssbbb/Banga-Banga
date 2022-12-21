@@ -16,7 +16,6 @@ class MetchingPostService {
     if (page >= 1) {
       offset = 6 * (page - 1);
     }
-    const query = `select * from MatchingPost;`;
     const posts = await MatchingPosts.findAll({ 
         offset: offset, limit: 6 }); //페이지네이션
     return posts;

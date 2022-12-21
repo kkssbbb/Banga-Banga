@@ -93,21 +93,20 @@ class User extends Sequelize.Model {
         },
       },
       {
-        intialAutoIncrement: 1,
         sequelize,
         timestamps: true,
         charset: "utf8", // 한국어 설정
         collate: "utf8_general_ci", // 한국어 설정
         tableName: "Users",
-        modelName: "User",
       }
     );
   }
 
   static associate(db) {
-    db.User.hasMany(db.Matching, {
-      foreignkey: "create_id",
+    db.User.hasMany(db.MatchingPosts, {
+      foreignKey: "user_id",
       sourceKey: "user_id",
+      onDelete: "cascade",
       onUpdate: "cascade",
     });
   }

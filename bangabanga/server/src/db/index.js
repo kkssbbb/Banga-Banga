@@ -30,7 +30,7 @@ db.OperationInformation =OperationInformation;
 db.MatchingLog =MatchingLog;
 db.ThemeImgAdress =ThemeImgAdress;
 db.ProfileImgAdress =ProfileImgAdress;
-
+ 
 
 // User.init(sequelize);
 User.init(sequelize);
@@ -42,7 +42,10 @@ MatchingLog.init(sequelize);
 ThemeImgAdress.init(sequelize); 
 ProfileImgAdress.init(sequelize); 
 
-// User.associate(db);
-//MatchingPosts.associate(db);
-
+//관계
+CafeInformation.associate(db);
+OperationInformation.associate(db);
+MatchingPosts.associate(db);
+MatchingSituation.associate(db);
+User.associate(db);
 export { db, sequelize };

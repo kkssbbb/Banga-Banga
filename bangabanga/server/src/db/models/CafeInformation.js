@@ -11,39 +11,38 @@ class CafeInformation extends Sequelize.Model {
           primaryKey: true,
           comment: "카페정보ID",
         },
-        location: { 
+        location: {
           type: DataTypes.STRING(10),
-          comment: '지역 대분류(서울)',
+          comment: "지역 대분류(서울)",
         },
         location_delete: {
           type: DataTypes.STRING(10),
-          comment: '지역 소분류(홍대,건대 등등)',
-         },
+          comment: "지역 소분류(홍대,건대 등등)",
+        },
         cafe_name: {
           type: DataTypes.STRING(30),
-          comment: '매장이름',
-         },
+          comment: "매장이름",
+        },
         star_rate: {
-          type: DataTypes.DECIMAL(4,2),
-          comment: '별점점수 4.23',
-         },
+          type: DataTypes.DECIMAL(4, 2),
+          comment: "별점점수 4.23",
+        },
         reviews_sum: {
           type: DataTypes.INTEGER,
-          comment: '매장 별점',
-         },
-        address: { 
+          comment: "매장 별점",
+        },
+        address: {
           type: DataTypes.STRING(20),
-          comment: '매장 주소',
+          comment: "매장 주소",
         },
-        latitude: { 
+        latitude: {
           type: DataTypes.STRING(5),
-          comment: '매장 위도',
+          comment: "매장 위도",
         },
-        longitude: { 
+        longitude: {
           type: DataTypes.STRING(5),
-          comment: '매장 경도'
+          comment: "매장 경도",
         },
-       
       },
       {
         charset: "utf8mb4", // 한국어+이모티콘 설정!
@@ -55,7 +54,22 @@ class CafeInformation extends Sequelize.Model {
       }
     );
   }
-  // static associate() {}
+  //관계 설정
+  // 모집글>카페정보<카페운영정보
+  static associate(db) {
+    db.CafeInformation.hasMany(db.OperationInformation, {
+      foreignKey: "cafe_id",
+      sourceKey: "cafe_id",
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    });
+    db.CafeInformation.hasMany(db.MatchingSituation, {
+      foreignKey: "cafe_id",
+      sourceKey: "cafe_id",
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    });
+  }
 }
 
 export { CafeInformation };

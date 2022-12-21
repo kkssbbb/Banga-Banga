@@ -12,7 +12,7 @@ class MatchingPosts extends Sequelize.Model {
         },
         // cafe_id: {
         //   type: DataTypes.BIGINT,
-         
+
         //   comment: "카페id",
         // },
         // user_id: {
@@ -55,7 +55,26 @@ class MatchingPosts extends Sequelize.Model {
       }
     );
   }
-  // static associate(db) { db.Post.belongsTo(db.User)};
+  static associate(db) {
+    db.MatchingPosts.belongsTo(db.CafeInformation, {
+      foreignKey: "cafe_id",
+      sourceKey: "cafe_id",
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    });
+    db.MatchingPosts.hasMany(db.MatchingSituation, {
+      foreignKey: "MatchingPosts_id",
+      sourceKey: "MatchingPosts_id",
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    });
+    db.MatchingPosts.belongsTo(db.User, {
+      foreignKey: "user_id",
+      sourceKey: "user_id",
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    });
+  }
 }
 
 export { MatchingPosts };
