@@ -32,15 +32,15 @@ db.ThemeImgAdress =ThemeImgAdress;
 db.ProfileImgAdress =ProfileImgAdress;
  
 
-// User.init(sequelize);
+
 User.init(sequelize);
 MatchingPosts.init(sequelize); 
-MatchingSituation.init(sequelize); 
-CafeInformation.init(sequelize); 
-OperationInformation.init(sequelize); 
-MatchingLog.init(sequelize); 
-ThemeImgAdress.init(sequelize); 
-ProfileImgAdress.init(sequelize); 
+MatchingSituation.init(sequelize);
+CafeInformation.init(sequelize);
+OperationInformation.init(sequelize);
+MatchingLog.init(sequelize);
+ThemeImgAdress.init(sequelize);
+ProfileImgAdress.init(sequelize);
 
 //관계
 CafeInformation.associate(db);

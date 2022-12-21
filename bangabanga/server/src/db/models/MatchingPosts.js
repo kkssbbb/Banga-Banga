@@ -10,15 +10,6 @@ class MatchingPosts extends Sequelize.Model {
           primaryKey: true,
           comment: "모집글ID",
         },
-        // cafe_id: {
-        //   type: DataTypes.BIGINT,
-
-        //   comment: "카페id",
-        // },
-        // user_id: {
-        //   type: DataTypes.BIGINT,
-        //   comment: "회원ID",
-        // },
         title: {
           type: DataTypes.STRING(30),
           comment: "제목",
@@ -29,13 +20,18 @@ class MatchingPosts extends Sequelize.Model {
           comment: "게시글내용",
           allowNull: false, //필수
         },
+        match_status:{
+          type: DataTypes.BOOLEAN,
+          defaultValue: false,
+          allowNull: true
+        },
         matching_location: {
           type: DataTypes.STRING(30),
           comment: "세부지역",
           allowNull: false, //필수
         },
         matching_time: {
-          type: DataTypes.STRING(30),
+          type: DataTypes.INTEGER,
           comment: "접선시간",
           allowNull: false, //필수
         },

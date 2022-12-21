@@ -11,13 +11,13 @@ class MetchingPostService {
 
   //전체 게시글 조회  게시글 6개로 페이지네이션
   async getPosts(page, offset) {
-    console.log(page,offset);
-    
     if (page >= 1) {
       offset = 6 * (page - 1);
     }
-    const posts = await MatchingPosts.findAll({ 
-        offset: offset, limit: 6 }); //페이지네이션
+    const posts = await MatchingPosts.findAll({
+      offset: offset,
+      limit: 6,
+    }); //페이지네이션
     return posts;
   }
 
