@@ -8,10 +8,17 @@ class CafeInformationService {
   constructor(model) {
     this.CafeInformation = model;
   }
-  async getCafes() {
+  async getCafesAll() {
     const query = `select * from CafeInformation
     inner join OperationInformation
     on CafeInformation.cafe_id = OperationInformation.cafe_id`;
+
+    const cafeDatas = await sequelize.query(query, { type: QueryTypes.SELECT });
+
+    return cafeDatas;
+  }
+  async getCafes() {
+    const query = `select * from CafeInformation`;
 
     const cafeDatas = await sequelize.query(query, { type: QueryTypes.SELECT });
 

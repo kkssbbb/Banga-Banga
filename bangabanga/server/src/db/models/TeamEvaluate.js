@@ -9,8 +9,12 @@ class TeamEvaluate extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
-        rater_id: {
-          type: DataTypes.STRING(100),
+        evaluator_id: {
+          type: DataTypes.STRING(20),
+          allowNull: false,
+        },
+        evaluate_target_id: {
+          type: DataTypes.STRING(20),
           allowNull: false,
         },
         short_evaluate: {
@@ -28,7 +32,6 @@ class TeamEvaluate extends Sequelize.Model {
         },
       },
       {
-        intialAutoIncrement: 1,
         sequelize,
         timestamps: true,
         charset: "utf8", // 한국어 설정
