@@ -71,7 +71,33 @@ class UserService {
     return userChanged;
   }
 
-  async getUsers() {}
+  async updateScore(updateScore, evaluateTargetId) {
+    const { mannerEvaluate, escapeEvaluate } = updateScore;
+    let user = await User.findOne({
+      where: { userId: evaluateTargetId },
+    });
+    console.log(user)
+    if (!user) {
+      throw new Error("회원 정보가 없습니다.");
+    }
+    console.log(escapeEvaluate, mannerEvaluate)
+    user.escapeScore += escapeEvaluate;
+    user.mannerEvaluate += mannerEvaluate;
+    user.save();
+
+    if (20 < user.escapeScore && user.escapeScore < 40) {
+      user.tier = "silver";
+    } else if (39 < user.escapeScore && user.escapeScore < 60) {
+      user.tier = "gold";
+    } else if (59 < user.escapeScore && user.escapeScore < 80) {
+      user.tier = "platinum";
+    } else if (79 < user.escapeScore && user.escapeScore < 101) {
+      user.tier = "diamond";
+    } else {
+      user.tier = "diamond";
+    }
+    user.save();
+  }
 
   //로그인 시 token 전달
   async getUserToken(loginInfo) {
