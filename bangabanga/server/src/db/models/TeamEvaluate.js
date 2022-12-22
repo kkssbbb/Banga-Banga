@@ -24,11 +24,11 @@ class TeamEvaluate extends Sequelize.Model {
         },
         mannerEvaluate: {
           type: DataTypes.INTEGER,
-          allowNull: false,
+          allowNull: true,
         },
         escapeEvaluate: {
           type: DataTypes.INTEGER,
-          allowNull: false,
+          allowNull: true,
         },
       },
       {
