@@ -14,8 +14,8 @@ class MatchingLog extends Sequelize.Model {
         defaultValue: false,
         commet: "팀원평가여부",
       },
-
     },
+    
     {
         charset: "utf8mb4", // 한국어+이모티콘 설정!
         sequelize,

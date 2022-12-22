@@ -11,10 +11,8 @@ class MapPostService {
 
   //지도로 보기에서 지역명(홍대)으로 get요청 api
   async getLocationfilterPosts(locationDetail) {
-   
-    
-    let recruitingNum = 0 //현재모집중인 
-   
+    let recruitingNum = 0; //현재모집중인
+
     //카페정보테이블 ,모집글 조회해서
     //조건1 필터링하기
     //조건2 필터링하기
@@ -27,22 +25,34 @@ class MapPostService {
     //  });
     //  console.log('cafeInformations : ', cafeInformations);
     //  console.log('matchingPosts : ', matchingPosts);
-  const query =  ` SELECT count(C.cafeId) as recruitingNum, C.cafeId, C.cafeName, C.locationDetail ,C.lat, C.lng FROM CafeInformation C
+
+
+    const query = ` SELECT count(C.cafeId) as recruitingNum, C.cafeId, C.cafeName, C.locationDetail ,C.lat, C.lng FROM CafeInformation C
   JOIN  MatchingPost P 
     ON C.cafeId = P.cafeId
-    where C.locationDetail = '${locationDetail}' and P.matchingTime > date_format(curdate(),'%Y%M%H%i' );`
-     const matchingPosts = await sequelize.query(query, { type: QueryTypes.SELECT });
+    where C.locationDetail = '${locationDetail}' and P.matchingTime > date_format(curdate(),'%Y%M%H%i' );`;
+    const matchingPosts = await sequelize.query(query, {
+      type: QueryTypes.SELECT,
+    });
 
-  console.log(matchingPosts);
 
-  recruitingNum = matchingPosts.length;
+    recruitingNum = matchingPosts.length;
 
-  
-    return [matchingPosts, recruitingNum];
+    return matchingPosts;
+  }
+
+//2. 마커클릭했을 떄 옆에 해당 카페에 등록되어있는 모집공고 보여주기 API
+  async getCafePosts(cafeId) {
+    const query = ` SELECT * FROM MatchingPost P 
+    where  P.cafeId = ${cafeId} and P.matchingTime > date_format(curdate(),'%Y%M%H%i' );`;
+      const cafePosts = await sequelize.query(query, {
+        type: QueryTypes.SELECT,
+      });
+      return cafePosts;
+
   }
 }
 
 const mapPostService = new MapPostService(MatchingPosts, CafeInformation);
 
 export { mapPostService };
-  
