@@ -37,7 +37,7 @@ class MatchingPosts extends Sequelize.Model {
         },
         view: {
           type: DataTypes.INTEGER,
-          comment: "조회수",
+          comment: "조회수", 
           defaultValue: 0,
         }, 
       },

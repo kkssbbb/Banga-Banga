@@ -11,11 +11,27 @@ metchingPostRouter.get("/map/:locationDetail", async (req, res, next) => {
   try {
     const locationfilterPosts =
       await mapPostService.getLocationfilterPosts(locationDetail);
+      
+      
     res.status(200).json(locationfilterPosts);
   } catch (error) {
     next(error);
   }
 });
+
+//2. 마커클릭했을 떄 옆에 해당 카페에 등록되어있는 모집공고 보여주기 API
+metchingPostRouter.get("/map/cafePost/:cafeId", async (req, res, next) => {
+  const cafeId = req.params.cafeId;
+
+  try {
+    const cafePosts =
+      await mapPostService.getCafePosts(cafeId);
+    res.status(200).json(cafePosts);
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 //게시글 전체 조회 (게시글 6개 페이지네이션)
 metchingPostRouter.get("/:page", async (req, res, next) => {

@@ -39,16 +39,16 @@ class CafeInformation extends Sequelize.Model {
           type: DataTypes.STRING,
           comment: "카페 홈페이지",  
         },
-        lat: {
-          type: DataTypes.STRING(5),
+        lat: { 
+          type: DataTypes.STRING,
           comment: "매장 위도",
-        },
+        }, 
         lng: {
-          type: DataTypes.STRING(5),
+          type: DataTypes.STRING,
           comment: "매장 경도",
         },
       },
-      {
+      { 
         charset: "utf8mb4", // 한국어+이모티콘 설정!
         sequelize,
         collate: "utf8mb4_general_ci", // 한국어 설정
@@ -57,12 +57,12 @@ class CafeInformation extends Sequelize.Model {
         paranoid: true, // timestamps 가 활성화 되어야 사용 가능 > deleteAt 옵션 on
       }
     );
-  }
+  } 
   //관계 설정
   // 모집글>카페정보<카페운영정보
   static associate(db) {
     db.CafeInformation.hasMany(db.OperationInformation, {
-      foreignKey: "cafeId",
+      foreignKey: "cafeId", 
       sourceKey: "cafeId",
       onDelete: "cascade",
       onUpdate: "cascade",
