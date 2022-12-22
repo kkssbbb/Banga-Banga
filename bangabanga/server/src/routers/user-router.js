@@ -6,12 +6,12 @@ const usersRouter = Router();
 
 usersRouter.post("/", async (req, res, next) => {
   try {
-    const { user_name, mobile_number, email, nick_name, password } = req.body;
+    const { userName, mobileNumber, email, nickName, password } = req.body;
     const userInfo = {
-      user_name,
-      mobile_number,
+      userName,
+      mobileNumber,
       email,
-      nick_name,
+      nickName,
       password,
     };
     const user = await userService.addUser(userInfo);

@@ -9,14 +9,14 @@ class UserService {
   }
   //회원가입
   async addUser(user) {
-    const { user_name, mobile_number, email, nick_name, password } = user;
+    const { userName, mobileNumber, email, nickName, password } = user;
     console.log(user);
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUserInfo = {
-      user_name,
-      mobile_number,
+      userName,
+      mobileNumber,
       email,
-      nick_name,
+      nickName,
       password: hashedPassword,
     };
     const newUser = await User.create(newUserInfo);
@@ -25,10 +25,10 @@ class UserService {
   }
   //회원정보수정
   async updateUser(userInfoRequired, updateData) {
-    const { user_id, checkPassword } = userInfoRequired;
+    const { userId, checkPassword } = userInfoRequired;
 
     let user = await User.findOne({
-      where: { user_id: user_id },
+      where: { userId: userId },
     });
     if (!user) {
       throw new Error("가입 내역이 없습니다.");

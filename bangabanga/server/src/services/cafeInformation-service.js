@@ -11,17 +11,31 @@ class CafeInformationService {
   async getCafesAll() {
     const query = `select * from CafeInformation
     inner join OperationInformation
-    on CafeInformation.cafe_id = OperationInformation.cafe_id`;
+    on CafeInformation.cafeId = OperationInformation.cafeId`;
 
     const cafeDatas = await sequelize.query(query, { type: QueryTypes.SELECT });
 
     return cafeDatas;
   }
-  async getCafes() {
-    const query = `select * from CafeInformation`;
-
-    const cafeDatas = await sequelize.query(query, { type: QueryTypes.SELECT });
-
+  async getCafes(page, offset) {
+    if (page >= 1) {
+      offset = 9 * (page - 1);
+    }
+    const cafeDatas = await CafeInformation.findAll({
+      offset: offset,
+      limit: 9,
+    });
+    return cafeDatas;
+  }
+  async getCafesDetail(page, offset, location) {
+    if (page >= 1) {
+      offset = 9 * (page - 1);
+    }
+    const cafeDatas = await CafeInformation.findAll({
+      where: { locationDetail: location },
+      offset: offset,
+      limit: 9,
+    });
     return cafeDatas;
   }
 }
