@@ -4,6 +4,7 @@ import {
   usersRouter,
   metchingPostRouter,
   cafeInformationRouter,
+  teamEvaluateRouter,
 } from "./routers";
 import { sequelize } from "./db";
 import cors from "cors";
@@ -27,9 +28,10 @@ app.use(express.urlencoded({ extended: false }));
 // html, css, js 라우팅
 // app.use(viewsRouter);
 
-app.use("/api/Users", usersRouter);
+app.use("/api/users", usersRouter);
 app.use("/api/matching-posts", metchingPostRouter);
 app.use("/api/cafe-infos", cafeInformationRouter);
+app.use("/api/evaluates", teamEvaluateRouter);
 
 app.use(errorHandler);
 
