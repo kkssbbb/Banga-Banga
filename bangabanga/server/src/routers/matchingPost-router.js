@@ -17,6 +17,8 @@ metchingPostRouter.get("/map/:locationDetail", async (req, res, next) => {
   }
 });
 
+
+
 //게시글 전체 조회 (게시글 6개 페이지네이션)
 metchingPostRouter.get("/:page", async (req, res, next) => {
   
