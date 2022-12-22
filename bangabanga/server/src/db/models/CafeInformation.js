@@ -5,7 +5,7 @@ class CafeInformation extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        cafe_id: {
+        cafeId: {
           type: DataTypes.BIGINT,
           autoIncrement: true,
           primaryKey: true,
@@ -15,19 +15,19 @@ class CafeInformation extends Sequelize.Model {
           type: DataTypes.STRING(10),
           comment: "지역 대분류(서울)",
         },
-        location_delete: {
+        locationDetail: {
           type: DataTypes.STRING(10),
           comment: "지역 소분류(홍대,건대 등등)",
         },
-        cafe_name: {
+        cafeName: {
           type: DataTypes.STRING(30),
           comment: "매장이름",
         },
-        star_rate: {
+        starRate: {
           type: DataTypes.DECIMAL(4, 2),
           comment: "별점점수 4.23",
         },
-        reviews_sum: {
+        reviewsSum: {
           type: DataTypes.INTEGER,
           comment: "매장 별점",
         },
@@ -35,11 +35,15 @@ class CafeInformation extends Sequelize.Model {
           type: DataTypes.STRING(20),
           comment: "매장 주소",
         },
-        latitude: {
+        homePage: {
+          type: DataTypes.STRING,
+          comment: "카페 홈페이지",  
+        },
+        lat: {
           type: DataTypes.STRING(5),
           comment: "매장 위도",
         },
-        longitude: {
+        lng: {
           type: DataTypes.STRING(5),
           comment: "매장 경도",
         },
@@ -58,14 +62,14 @@ class CafeInformation extends Sequelize.Model {
   // 모집글>카페정보<카페운영정보
   static associate(db) {
     db.CafeInformation.hasMany(db.OperationInformation, {
-      foreignKey: "cafe_id",
-      sourceKey: "cafe_id",
+      foreignKey: "cafeId",
+      sourceKey: "cafeId",
       onDelete: "cascade",
       onUpdate: "cascade",
     });
     db.CafeInformation.hasMany(db.MatchingSituation, {
-      foreignKey: "cafe_id",
-      sourceKey: "cafe_id",
+      foreignKey: "cafeId",
+      sourceKey: "cafeId",
       onDelete: "cascade",
       onUpdate: "cascade",
     });

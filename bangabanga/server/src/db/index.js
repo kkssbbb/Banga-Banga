@@ -41,8 +41,9 @@ db.ThemeImgAdress = ThemeImgAdress;
 db.ProfileImgAdress = ProfileImgAdress;
 db.TeamEvaluate = TeamEvaluate;
 
+
 User.init(sequelize);
-MatchingPosts.init(sequelize);
+MatchingPosts.init(sequelize); 
 MatchingSituation.init(sequelize);
 CafeInformation.init(sequelize);
 OperationInformation.init(sequelize);

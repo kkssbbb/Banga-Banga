@@ -3,7 +3,7 @@ import { Sequelize, DataTypes } from "sequelize";
 class ThemeImgAdress extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
-        themeImgAdress_id: {
+        themeImgAdressId: {
         type: DataTypes.BIGINT,
         autoIncrement: true,
         primaryKey: true,

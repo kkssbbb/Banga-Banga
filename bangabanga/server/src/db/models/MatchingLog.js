@@ -3,13 +3,13 @@ import { Sequelize, DataTypes } from "sequelize";
 class MatchingLog extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
-      matching_log_id: {
+      matchingLogId: {
         type: DataTypes.BIGINT,
         autoIncrement: true,
         primaryKey: true,
         comment: "매칭테이블ID",
       },
-      is_evaluate: {
+      isEvaluate: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
         commet: "팀원평가여부",
@@ -30,4 +30,5 @@ class MatchingLog extends Sequelize.Model {
 }
 
 
-export {MatchingLog};
+
+export {MatchingLog}; 

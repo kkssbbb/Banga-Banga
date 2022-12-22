@@ -4,23 +4,18 @@ class MatchingSituation extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        recruitment_status_id: {
+        recruitmentStatusId: {
           type: DataTypes.BIGINT,
           autoIncrement: true,
           primaryKey: true,
           comment: "모집현황ID",
         },
-        recruitment_status: {
+        recruitmentStatus: {
           type: DataTypes.INTEGER,
           defaultValue: 0,
           commet: "모집현황 수",
         },
-        participants_id:{
-          type: DataTypes.INTEGER,
-          defaultValue: 0,
-          commet: "모집현황 수",
-        },
-        is_evaluate: {
+        isFinish: {
           type: DataTypes.BOOLEAN,
           defaultValue: false,
           comment: "평가 완료 여부",
@@ -43,8 +38,8 @@ class MatchingSituation extends Sequelize.Model {
   }
   static associate(db) {
     db.MatchingSituation.belongsTo(db.MatchingPosts, {
-      foreignKey: "MatchingPosts_id",
-      sourceKey: "MatchingPosts_id",
+      foreignKey: "matchingPostsId",
+      sourceKey: "matchingPostsId",
       onDelete: "cascade",
       onUpdate: "cascade",
     });
