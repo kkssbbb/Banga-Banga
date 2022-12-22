@@ -4,7 +4,7 @@ class MatchingPosts extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        MatchingPosts_id: {
+        matchingPostsId: {
           type: DataTypes.BIGINT,
           autoIncrement: true,
           primaryKey: true,
@@ -20,17 +20,17 @@ class MatchingPosts extends Sequelize.Model {
           comment: "게시글내용",
           allowNull: false, //필수
         },
-        match_status:{
+        matchStatus:{
           type: DataTypes.BOOLEAN,
           defaultValue: false,
           allowNull: true
         },
-        matching_location: {
+        matchingLocation: {
           type: DataTypes.STRING(30),
           comment: "세부지역",
           allowNull: false, //필수
         },
-        matching_time: {
+        matchingTime: {
           type: DataTypes.INTEGER,
           comment: "접선시간",
           allowNull: false, //필수
@@ -39,7 +39,7 @@ class MatchingPosts extends Sequelize.Model {
           type: DataTypes.INTEGER,
           comment: "조회수",
           defaultValue: 0,
-        },
+        }, 
       },
       {
         charset: "utf8mb4", // 한국어+이모티콘 설정!
@@ -53,14 +53,14 @@ class MatchingPosts extends Sequelize.Model {
   }
   static associate(db) {
     db.MatchingPosts.belongsTo(db.CafeInformation, {
-      foreignKey: "cafe_id",
-      sourceKey: "cafe_id",
+      foreignKey: "cafeId",
+      sourceKey: "cafeId",
       onDelete: "cascade",
       onUpdate: "cascade",
     });
     db.MatchingPosts.hasMany(db.MatchingSituation, {
-      foreignKey: "MatchingPosts_id",
-      sourceKey: "MatchingPosts_id",
+      foreignKey: "matchingPostsId",
+      sourceKey: "matchingPostsId",
       onDelete: "cascade",
       onUpdate: "cascade",
     });

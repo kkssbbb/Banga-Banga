@@ -34,7 +34,7 @@ class MetchingPostService {
   //클릭한 게시글 조회
   async getClickPost(postId) {
     const result = MatchingPosts.findOne({
-      where: { MatchingPosts_id: postId },
+      where: { matchingPostsId: postId },
     }).then((MatchingPosts) => MatchingPosts.increment("view", { view: 1 }));
 
     return result;
@@ -46,8 +46,8 @@ class MetchingPostService {
     const result = MatchingPosts.create({
       title: postContent.title,
       content: postContent.content,
-      matching_location: postContent.matching_location,
-      matching_time: postContent.matching_time,
+      matchingLocation: postContent.matchingLocation,
+      matchingTime: postContent.matchingTime,
     });
   }
 
@@ -60,8 +60,8 @@ class MetchingPostService {
       {
         title: patchPost.title,
         content: patchPost.content,
-        matching_location: patchPost.matching_location,
-        matching_time: patchPost.matching_time,
+        matching_location: patchPost.matchingLocation,
+        matching_time: patchPost.matchingTime,
       },
       {
         where: { MatchingPosts_id: postid },

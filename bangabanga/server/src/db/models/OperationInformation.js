@@ -5,7 +5,7 @@ class OperationInformation extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        operation_information_id: {
+        operationInformationId: {
           type: DataTypes.BIGINT,
           autoIncrement: true,
           primaryKey: true,
@@ -32,7 +32,7 @@ class OperationInformation extends Sequelize.Model {
           type: DataTypes.STRING(20),
           comment: "테마",
         },
-        recommended_num: {
+        recommendedNum: {
           type: DataTypes.STRING(20),
           comment: "추천인원수",
         },
@@ -59,8 +59,8 @@ class OperationInformation extends Sequelize.Model {
   // 모집글>카페정보<카페운영정보
   static associate(db) {
     db.OperationInformation.belongsTo(db.CafeInformation, {
-      foreignKey: "cafe_id",
-      sourceKey: "cafe_id",
+      foreignKey: "cafeId",
+      sourceKey: "cafeId",
       onDelete: "cascade",
       onUpdate: "cascade",
     });

@@ -1,15 +1,16 @@
 import { Router } from "express";
-import { metchingPostService } from "../services";
+import { metchingPostService, mapPostService } from "../services";
 
 const metchingPostRouter = Router();
 
+
 //지도로 보기에서 지역명(홍대)으로 get요청 api
-metchingPostRouter.get("/:locationDetail", async (req, res, next) => {
+metchingPostRouter.get("/map/:locationDetail", async (req, res, next) => {
   const locationDetail = req.params.locationDetail;
 
   try {
     const locationfilterPosts =
-      await metchingPostService.getLocationfilterPosts(locationDetail);
+      await mapPostService.getLocationfilterPosts(locationDetail);
     res.status(200).json(locationfilterPosts);
   } catch (error) {
     next(error);
@@ -18,6 +19,7 @@ metchingPostRouter.get("/:locationDetail", async (req, res, next) => {
 
 //게시글 전체 조회 (게시글 6개 페이지네이션)
 metchingPostRouter.get("/:page", async (req, res, next) => {
+  
   try {
     let page = req.params.page;
     let offset = 0;
