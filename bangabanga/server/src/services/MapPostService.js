@@ -32,12 +32,12 @@ class MapPostService {
     ON C.cafeId = P.cafeId
     where C.locationDetail = '${locationDetail}' and P.matchingTime > date_format(curdate(),'%Y%M%H%i' );`;
     const matchingPosts = await sequelize.query(query, {
-      type: QueryTypes.SELECT,
+      type: QueryTypes.SELECT, 
     });
-    console.log(matchingPosts[0].recruitingNum);
+  
     
     if(matchingPosts[0].recruitingNum === 0){
-     return   `현재 ${locationDetail} 지역은 모집중인 카페가 없습니다`
+     return   []
     }
 
 
