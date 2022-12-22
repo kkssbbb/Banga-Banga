@@ -13,7 +13,7 @@ class MapPostService {
   async getLocationfilterPosts(locationDetail) {
    
     
-    const recruiting = [] //현재모집중인 
+    let recruitingNum = 0 //현재모집중인 
    
     //카페정보테이블 ,모집글 조회해서
     //조건1 필터링하기
@@ -27,14 +27,18 @@ class MapPostService {
     //  });
     //  console.log('cafeInformations : ', cafeInformations);
     //  console.log('matchingPosts : ', matchingPosts);
-  const query =  ` SELECT C.cafeId, C.cafeName, C.locationDetail ,C.lat, C.lng, P.matchingTime FROM CafeInformation C
+  const query =  ` SELECT count(C.cafeId) as recruitingNum, C.cafeId, C.cafeName, C.locationDetail ,C.lat, C.lng FROM CafeInformation C
   JOIN  MatchingPost P 
     ON C.cafeId = P.cafeId
     where C.locationDetail = '${locationDetail}' and P.matchingTime > date_format(curdate(),'%Y%M%H%i' );`
      const matchingPosts = await sequelize.query(query, { type: QueryTypes.SELECT });
 
-    
-    return matchingPosts;
+  console.log(matchingPosts);
+
+  recruitingNum = matchingPosts.length;
+
+  
+    return [matchingPosts, recruitingNum];
   }
 }
 
