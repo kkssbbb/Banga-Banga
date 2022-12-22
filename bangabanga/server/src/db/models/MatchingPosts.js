@@ -65,8 +65,8 @@ class MatchingPosts extends Sequelize.Model {
       onUpdate: "cascade",
     });
     db.MatchingPosts.belongsTo(db.User, {
-      foreignKey: "user_id",
-      sourceKey: "user_id",
+      foreignKey: "userId",
+      sourceKey: "userId",
       onDelete: "cascade",
       onUpdate: "cascade",
     });

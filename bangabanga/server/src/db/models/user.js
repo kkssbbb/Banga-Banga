@@ -4,7 +4,7 @@ class User extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        user_id: {
+        userId: {
           type: DataTypes.BIGINT,
           autoIncrement: true,
           primaryKey: true,
@@ -14,11 +14,11 @@ class User extends Sequelize.Model {
           allowNull: false,
           defaultValue: "일반회원",
         },
-        user_name: {
+        userName: {
           type: DataTypes.STRING(100),
           allowNull: false,
         },
-        mobile_number: {
+        mobileNumber: {
           type: DataTypes.STRING(100),
           allowNull: false,
         },
@@ -29,7 +29,7 @@ class User extends Sequelize.Model {
             isEmail: true,
           },
         },
-        nick_name: {
+        nickName: {
           type: DataTypes.STRING(200),
           allowNull: false,
         },
@@ -37,7 +37,7 @@ class User extends Sequelize.Model {
           type: DataTypes.STRING(200),
           allowNull: false,
         },
-        user_intro: {
+        userIntro: {
           type: DataTypes.STRING(200),
           allowNull: true,
         },
@@ -53,19 +53,19 @@ class User extends Sequelize.Model {
           type: DataTypes.STRING(200),
           allowNull: true,
         },
-        preference_theme: {
+        preferenceTheme: {
           type: DataTypes.STRING(200),
           allowNull: true,
         },
-        non_preference_theme: {
+        nonPreferenceTheme: {
           type: DataTypes.STRING(200),
           allowNull: true,
         },
-        preference_location: {
+        preferenceLocation: {
           type: DataTypes.STRING(200),
           allowNull: true,
         },
-        rating_score: {
+        ratingScore: {
           type: DataTypes.INTEGER,
           allowNull: false,
           defaultValue: 0,
@@ -75,25 +75,20 @@ class User extends Sequelize.Model {
           allowNull: false,
           defaultValue: "bronze",
         },
-        escape_score: {
+        escapeScore: {
           type: DataTypes.INTEGER,
           allowNull: false,
           defaultValue: 0,
         },
-        matching_count: {
+        matchingCount: {
           type: DataTypes.INTEGER,
           allowNull: false,
           defaultValue: 0,
         },
-        manner_evaluate: {
+        mannerEvaluate: {
           type: DataTypes.INTEGER,
           allowNull: false,
           defaultValue: 50,
-        },
-        created_date: {
-          type: DataTypes.DATE,
-          allowNull: false,
-          defaultValue: Sequelize.fn("now"),
         },
       },
       {
@@ -109,8 +104,8 @@ class User extends Sequelize.Model {
 
   static associate(db) {
     db.User.hasMany(db.MatchingPosts, {
-      foreignKey: "user_id",
-      sourceKey: "user_id",
+      foreignKey: "userId",
+      sourceKey: "userId",
       onDelete: "cascade",
       onUpdate: "cascade",
     });

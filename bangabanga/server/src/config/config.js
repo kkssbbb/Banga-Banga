@@ -8,7 +8,8 @@ const development = {
   database: env.AWS_MYSQL_DATABASE,
   host: env.AWS_MYSQL_URL,
   dialect: "mysql",
-  port: env.AWS_MYSQL_PORT
+  port: env.AWS_MYSQL_PORT,
+  timezone: '+09:00',
 };
 
 const production = {
