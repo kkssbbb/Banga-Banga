@@ -4,29 +4,29 @@ class TeamEvaluate extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        teamEvaluate_id: {
+        teamEvaluateId: {
           type: DataTypes.BIGINT,
           autoIncrement: true,
           primaryKey: true,
         },
-        evaluator_id: {
+        evaluatorId: {
           type: DataTypes.STRING(20),
           allowNull: false,
         },
-        evaluate_target_id: {
+        evaluateTargetId: {
           type: DataTypes.STRING(20),
           allowNull: false,
         },
-        short_evaluate: {
+        shortEvaluate: {
           type: DataTypes.STRING(300),
           allowNull: true,
           defaultValue: "재미있었습니다!",
         },
-        manner_evaluate: {
+        mannerEvaluate: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
-        escape_evaluate: {
+        escapeEvaluate: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
