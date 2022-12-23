@@ -45,27 +45,27 @@ class UserService {
     //   updateData.password = newHashedPassword;
     //   console.log(newHashedPassword);
     // }
-    const { escape_score } = updateData;
-    console.log(updateData.escape_score);
-    if (escape_score) {
-      user.escape_score += escape_score;
+    const { escapeScore } = updateData;
+    console.log(updateData.escapeScore);
+    if (escapeScore) {
+      user.escapeScore += escapeScore;
     }
     user.save();
-    console.log(user.escape_score);
-    if (20 < user.escape_score && user.escape_score < 40) {
+    console.log(user.escapeScore);
+    if (20 < user.escapeScore && user.escapeScore < 40) {
       updateData.tier = "silver";
-    } else if (39 < user.escape_score && user.escape_score < 60) {
+    } else if (39 < user.escapeScore && user.escapeScore < 60) {
       updateData.tier = "gold";
-    } else if (59 < user.escape_score && user.escape_score < 80) {
+    } else if (59 < user.escapeScore && user.escapeScore < 80) {
       updateData.tier = "platinum";
-    } else if (79 < user.escape_score && user.escape_score < 101) {
+    } else if (79 < user.escapeScore && user.escapeScore < 101) {
       updateData.tier = "diamond";
     } else {
       updateData.tier = "diamond";
     }
 
     const userChanged = await User.update(updateData, {
-      where: { user_id },
+      where: { userId },
     });
 
     return userChanged;
@@ -85,7 +85,9 @@ class UserService {
     user.mannerEvaluate += mannerEvaluate;
     user.save();
 
-    if (20 < user.escapeScore && user.escapeScore < 40) {
+    if (0 <= user.escapeScore && user.escapeScore <= 21) {
+      user.tier = "bronze";
+    } else if (20 < user.escapeScore && user.escapeScore < 40) {
       user.tier = "silver";
     } else if (39 < user.escapeScore && user.escapeScore < 60) {
       user.tier = "gold";
@@ -138,7 +140,7 @@ class UserService {
       refreshKey,
       { expiresIn: "7d" }
     );
-    console.log(refreshToken)
+    console.log(refreshToken);
 
     return { accessToken, refreshToken };
   }
