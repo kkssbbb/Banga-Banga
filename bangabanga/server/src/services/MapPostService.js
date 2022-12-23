@@ -27,10 +27,12 @@ class MapPostService {
     //  console.log('matchingPosts : ', matchingPosts);
 
 
-    const query = ` SELECT count(C.cafeId) as recruitingNum, C.cafeId, C.cafeName, C.locationDetail ,C.lat, C.lng FROM CafeInformation C
-  JOIN  MatchingPost P 
-    ON C.cafeId = P.cafeId
-    where C.locationDetail = '${locationDetail}' and P.matchingTime > date_format(curdate(),'%Y%M%H%i' );`;
+    const query = ` SELECT  count(C.cafeId) as recruitingNum, C.cafeId, C.cafeName, C.locationDetail ,C.lat, C.lng FROM CafeInformation C
+    JOIN  MatchingPost P 
+      ON C.cafeId = P.cafeId
+      where C.locationDetail = '건대' and P.matchingTime > date_format(curdate(),'%Y%M%H%i' )
+        group by C.cafeId
+      having count(C.cafeId);`;
     const matchingPosts = await sequelize.query(query, {
       type: QueryTypes.SELECT, 
     });

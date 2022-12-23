@@ -22,7 +22,6 @@ metchingPostRouter.get("/map/:locationDetail", async (req, res, next) => {
 //2. 마커클릭했을 떄 옆에 해당 카페에 등록되어있는 모집공고 보여주기 API
 metchingPostRouter.get("/map/cafePost/:cafeId", async (req, res, next) => {
   const cafeId = req.params.cafeId;
-
   try {
     const cafePosts =
       await mapPostService.getCafePosts(cafeId);
