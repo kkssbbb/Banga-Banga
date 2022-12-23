@@ -24,10 +24,7 @@ metchingPostRouter.get("/map/cafePost/:cafeId", async (req, res, next) => {
   try {
     const [recruitingInfo,cafeInfo] = await mapPostService.getCafePosts(cafeId);
 
-   // console.log(result);
-   console.log(recruitingInfo,cafeInfo);
-    
-    res.status(200).json({"cafeInfo":cafeInfo,"recruitingInfo":recruitingInfo});
+    res.status(200).json({"cafeInfo":cafeInfo[0],"recruitingInfo":recruitingInfo});
   } catch (error) {
     next(error);
   }
