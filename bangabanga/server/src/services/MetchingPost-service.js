@@ -9,10 +9,12 @@ class MetchingPostService {
     this.MatchingPosts = model;
   }
 
-  //전체 게시글  지역별로 조회
-  async getLocalDetailPosts(localDetail) {
-    const query = `select * from MatchingPost
-    where matchingLocation = "${localDetail}";
+  //전체 게시글 조회  게시글 6개로 페이지네이션 -> 지역별로
+  async getPosts(localDetail) {
+    const query = `select C.address, M.* from MatchingPost M   
+    join CafeInformation C
+       ON C.cafeId = M.cafeId
+      where M.matchingLocation = "${localDetail}";
     `;
     const posts = await sequelize.query(query, {
       type: QueryTypes.SELECT,
@@ -72,7 +74,7 @@ class MetchingPostService {
     MatchingPosts.update(
       {
         title: patchPost.title,
-        peopleNum:patchPost.count,
+        peopleNum:patchPost.peopleNum,
         themeName: patchPost.themeName,
         matchStatus: patchPost.matchStatus,
         matchingLocation: patchPost.matchingLocation,

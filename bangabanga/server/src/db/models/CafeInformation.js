@@ -20,7 +20,7 @@ class CafeInformation extends Sequelize.Model {
           comment: "지역 소분류(홍대,건대 등등)",
         },
         cafeName: {
-          type: DataTypes.STRING(30),
+          type: DataTypes.STRING(100),
           comment: "매장이름",
         },
         starRate: {
@@ -32,7 +32,7 @@ class CafeInformation extends Sequelize.Model {
           comment: "매장 별점",
         },
         address: {
-          type: DataTypes.STRING(20),
+          type: DataTypes.STRING(100),
           comment: "매장 주소",
         },
         homePage: {

@@ -5,5 +5,7 @@ class MatchingSituationService {
     constructor(model) {
       this.MatchingSituation = model;
     }
-    async 
+    async addParticipants(participantsInfo){
+        
+    }
 }
