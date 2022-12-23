@@ -12,6 +12,7 @@ metchingPostRouter.get("/map/:locationDetail", async (req, res, next) => {
     const locationfilterPosts =
       await mapPostService.getLocationfilterPosts(locationDetail);
       
+      console.log('라우터쪽',locationfilterPosts );
       
     res.status(200).json(locationfilterPosts);
   } catch (error) {
@@ -60,7 +61,7 @@ metchingPostRouter.get("/:user_id", async (req, res, next) => {
 metchingPostRouter.get(
   "/read-post/:MatchingPosts_id",
   async (req, res, next) => {
-    console.log("test22");
+  
 
     try {
       const postId = req.params.MatchingPosts_id;
