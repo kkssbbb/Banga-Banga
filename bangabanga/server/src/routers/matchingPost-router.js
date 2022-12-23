@@ -3,16 +3,15 @@ import { metchingPostService, mapPostService } from "../services";
 
 const metchingPostRouter = Router();
 
-
 //지도로 보기에서 지역명(홍대)으로 get요청 api
 metchingPostRouter.get("/map/:locationDetail", async (req, res, next) => {
   const locationDetail = req.params.locationDetail;
 
   try {
-    const locationfilterPosts =
-      await mapPostService.getLocationfilterPosts(locationDetail);
-      
-      
+    const locationfilterPosts = await mapPostService.getLocationfilterPosts(
+      locationDetail
+    );
+
     res.status(200).json(locationfilterPosts);
   } catch (error) {
     next(error);
@@ -22,24 +21,19 @@ metchingPostRouter.get("/map/:locationDetail", async (req, res, next) => {
 //2. 마커클릭했을 떄 옆에 해당 카페에 등록되어있는 모집공고 보여주기 API
 metchingPostRouter.get("/map/cafePost/:cafeId", async (req, res, next) => {
   const cafeId = req.params.cafeId;
-
   try {
-    const cafePosts =
-      await mapPostService.getCafePosts(cafeId);
+    const cafePosts = await mapPostService.getCafePosts(cafeId);
     res.status(200).json(cafePosts);
   } catch (error) {
     next(error);
   }
 });
 
-
-//게시글 전체 조회 (게시글 6개 페이지네이션)
-metchingPostRouter.get("/:page", async (req, res, next) => {
-  
+//게시글 전체 조회 (게시글 6개 페이지네이션) ->(페이징x 지역별필터링으로 수정)
+metchingPostRouter.get("/:local_detail", async (req, res, next) => {
+  let localDetail = req.params.local_detail;
   try {
-    let page = req.params.page;
-    let offset = 0;
-    const posts = await metchingPostService.getPosts(page, offset);
+    const posts = await metchingPostService.getPosts(localDetail);
     res.status(200).json(posts);
   } catch (error) {
     next(error);
@@ -61,8 +55,6 @@ metchingPostRouter.get("/:user_id", async (req, res, next) => {
 metchingPostRouter.get(
   "/read-post/:MatchingPosts_id",
   async (req, res, next) => {
-    console.log("test22");
-
     try {
       const postId = req.params.MatchingPosts_id;
       const clickPost = await metchingPostService.getClickPost(postId);

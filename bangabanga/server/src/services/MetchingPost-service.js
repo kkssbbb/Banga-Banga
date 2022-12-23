@@ -9,15 +9,14 @@ class MetchingPostService {
     this.MatchingPosts = model;
   }
 
-  //전체 게시글 조회  게시글 6개로 페이지네이션
-  async getPosts(page, offset) {
-    if (page >= 1) {
-      offset = 6 * (page - 1);
-    }
-    const posts = await MatchingPosts.findAll({
-      offset: offset,
-      limit: 6,
-    }); //페이지네이션
+  //전체 게시글 조회  게시글 6개로 페이지네이션 -> 지역별로
+  async getPosts(localDetail) {
+    const query = `select * from MatchingPost
+    where matchingLocation = "${localDetail}";
+    `;
+    const posts = await sequelize.query(query, {
+      type: QueryTypes.SELECT,
+    });
     return posts;
   }
 
@@ -54,7 +53,6 @@ class MetchingPostService {
   //모집 게시글 수정
   async updatePost(postid, patchPost) {
     [patchPost] = patchPost;
-    console.log("아이디: ", postid, patchPost.title);
 
     MatchingPosts.update(
       {

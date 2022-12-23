@@ -27,14 +27,9 @@ class CafeInformationService {
     });
     return cafeDatas;
   }
-  async getCafesDetail(page, offset, location) {
-    if (page >= 1) {
-      offset = 9 * (page - 1);
-    }
+  async getCafesDetail(location) {
     const cafeDatas = await CafeInformation.findAll({
-      where: { locationDetail: location },
-      offset: offset,
-      limit: 9,
+      where: { locationDetail:  `${location}` },
     });
     return cafeDatas;
   }
