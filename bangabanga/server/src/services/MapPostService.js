@@ -11,7 +11,7 @@ class MapPostService {
 
   //지도로 보기에서 지역명(홍대)으로 get요청 api
   async getLocationfilterPosts(locationDetail) {
-
+console.log('testssg');
 
     //카페정보테이블 ,모집글 조회해서
     //조건1 필터링하기
@@ -30,7 +30,7 @@ class MapPostService {
     const query = ` SELECT  count(C.cafeId) as recruitingNum, C.cafeId, C.cafeName, C.locationDetail ,C.lat, C.lng FROM CafeInformation C
     JOIN  MatchingPost P 
       ON C.cafeId = P.cafeId
-      where C.locationDetail = '건대' and P.matchingTime > date_format(curdate(),'%Y%M%H%i' )
+      where C.locationDetail = '${locationDetail}' and P.matchingTime > date_format(curdate(),'%Y%M%H%i' )
         group by C.cafeId
       having count(C.cafeId);`;
     const matchingPosts = await sequelize.query(query, {
