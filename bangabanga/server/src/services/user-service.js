@@ -76,11 +76,11 @@ class UserService {
     let user = await User.findOne({
       where: { userId: evaluateTargetId },
     });
-    console.log(user)
+    console.log(user);
     if (!user) {
       throw new Error("회원 정보가 없습니다.");
     }
-    console.log(escapeEvaluate, mannerEvaluate)
+    console.log(escapeEvaluate, mannerEvaluate);
     user.escapeScore += escapeEvaluate;
     user.mannerEvaluate += mannerEvaluate;
     user.save();
@@ -116,21 +116,31 @@ class UserService {
     const hashedPassword = user.password; // db에 저장되어 있는 암호화된 비밀번호
 
     const isPasswordCorrect = await bcrypt.compare(password, hashedPassword);
-
+    console.log(hashedPassword);
+    console.log;
     if (!isPasswordCorrect) {
       throw new Error(
         "비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요."
       );
     }
 
-    const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
+    const accessKey = process.env.ACCESS_SECRET || "access-key";
 
-    const token = jwt.sign(
-      { user_id: user.user_id, role: user.role },
-      secretKey
+    const accessToken = jwt.sign(
+      { userId: user.userId, role: user.role },
+      accessKey,
+      { expiresIn: "1m" }
     );
+    console.log(accessToken);
+    const refreshKey = process.env.REFRESH_SECRET || "refresh-key";
+    const refreshToken = jwt.sign(
+      { userId: user.userId, role: user.role },
+      refreshKey,
+      { expiresIn: "7d" }
+    );
+    console.log(refreshToken)
 
-    return { token };
+    return { accessToken, refreshToken };
   }
 
   //유저정보 얻기
