@@ -20,11 +20,6 @@ class MatchingSituation extends Sequelize.Model {
           defaultValue: false,
           comment: "평가 완료 여부",
         },
-
-        //   matching_post_id: {
-        //     type: DataTypes.BIGINT,
-        //     comment: "모집글ID",
-        //   },
       },
       {
         charset: "utf8mb4", // 한국어+이모티콘 설정!
