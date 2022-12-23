@@ -16,7 +16,7 @@ class CafeInformationService {
     const cafeDatas = await sequelize.query(query, { type: QueryTypes.SELECT });
 
     return cafeDatas;
-  }
+  }s
   async getCafes(page, offset) {
     if (page >= 1) {
       offset = 9 * (page - 1);
@@ -29,7 +29,7 @@ class CafeInformationService {
   }
   async getCafesDetail(location) {
     const cafeDatas = await CafeInformation.findAll({
-      where: { locationDetail:  `${location}` },
+      where: { locationDetail: `${location}` },
     });
     return cafeDatas;
   }

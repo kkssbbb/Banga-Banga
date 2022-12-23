@@ -19,7 +19,6 @@ function loginRequired(req, res, next) {
 
     const userId = jwtDecoded.userId;
 
-    // 라우터에서 req.currentUserId를 통해 유저의 id에 접근 가능하게 됨
     req.currentUserId = userId;
 
     next();
@@ -28,7 +27,7 @@ function loginRequired(req, res, next) {
     // 403 코드로 JSON 형태로 프론트에 전달함.
     res.status(403).json({
       result: "forbidden-approach",
-      reason: "정상적인 토큰이 아닙니다.",
+      reason: "토큰 값에 문제가 발생하였습니다.",
     });
 
     return;

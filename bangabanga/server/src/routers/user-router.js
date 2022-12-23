@@ -4,6 +4,18 @@ import { userService } from "../services";
 
 const usersRouter = Router();
 
+usersRouter.get("/user", loginRequired, async (req, res, next) => {
+  try {
+    const userId = req.currentUserId;
+    // console.log(userId);
+    const currentUserInfo = await userService.getUserById(userId);
+
+    res.status(200).json(currentUserInfo);
+  } catch (err) {
+    next(err);
+  }
+});
+
 usersRouter.post("/", async (req, res, next) => {
   try {
     const { userName, mobileNumber, email, nickName, password } = req.body;
@@ -29,19 +41,14 @@ usersRouter.post("/login", async function (req, res, next) {
 
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
     const userToken = await userService.getUserToken({ email, password });
-    // res.cookie("refreshToken", userToken.refreshToken, {
-    //   sameSite: "None",
-    //   httpOnly: "true",
-    //   secure: "true",
-    // });
-    // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
+
     res.status(200).json(userToken);
   } catch (error) {
     next(error);
   }
 });
 
-usersRouter.patch("/:id", async (req, res, next) => {
+usersRouter.patch("/:userId", loginRequired, async (req, res, next) => {
   try {
     const {
       role,
@@ -108,15 +115,6 @@ usersRouter.get("/", async (req, res, next) => {
   }
 });
 
-usersRouter.get("/:id", async (req, res, next) => {
-  const id = req.params.id;
-  try {
-    const users = await userService.getUserById(id);
-    res.status(200).json(users);
-  } catch (error) {
-    next(error);
-  }
-});
 usersRouter.delete("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
