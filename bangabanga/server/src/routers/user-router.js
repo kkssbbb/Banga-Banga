@@ -16,6 +16,18 @@ usersRouter.get("/user", loginRequired, async (req, res, next) => {
   }
 });
 
+usersRouter.get("/user", loginRequired, async (req, res, next) => {
+  try {
+    const userId = req.currentUserId;
+    // console.log(userId);
+    const currentUserInfo = await userService.getUserById(userId);
+
+    res.status(200).json(currentUserInfo);
+  } catch (err) {
+    next(err);
+  }
+});
+
 usersRouter.post("/", async (req, res, next) => {
   try {
     const { userName, mobileNumber, email, nickName, password } = req.body;
@@ -41,6 +53,7 @@ usersRouter.post("/login", async function (req, res, next) {
 
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
     const userToken = await userService.getUserToken({ email, password });
+
 
     res.status(200).json(userToken);
   } catch (error) {
@@ -75,14 +88,19 @@ usersRouter.patch("/:userId", async (req, res, next) => {
     // const userInfoRequired = {user_id, "비밀번호 확인"};
     //회원정보를 수정하려면 현재비밀번호 입력 필요!!!!!!
     const userInfoRequired = { userId, checkPassword };
+    const userInfoRequired = { userId, checkPassword };
 
     const updateData = {
       ...(role && { role }),
       ...(userName && { userName }),
       ...(mobileNumber && { mobileNumber }),
+      ...(userName && { userName }),
+      ...(mobileNumber && { mobileNumber }),
       ...(email && { email }),
       ...(nickName && { nickName }),
+      ...(nickName && { nickName }),
       ...(password && { password }),
+      ...(userIntro && { userIntro }),
       ...(userIntro && { userIntro }),
       ...(gender && { gender }),
       ...(age && { age }),

@@ -15,10 +15,15 @@ class MatchingPosts extends Sequelize.Model {
           comment: "제목",
           allowNull: false, //필수
         },
-        content: {
-          type: DataTypes.STRING(300),
+        peopleNum: {
+          type: DataTypes.INTEGER,
           comment: "게시글내용",
           allowNull: false, //필수
+        },
+        themeName: {
+          type: DataTypes.STRING(30),
+          comment: "해당카페 테마명",
+          allowNull: true, //필수
         },
         matchStatus:{
           type: DataTypes.BOOLEAN,
