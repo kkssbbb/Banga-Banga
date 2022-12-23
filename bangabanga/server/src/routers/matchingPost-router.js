@@ -77,7 +77,9 @@ metchingPostRouter.get(
 //모집 게시글 쓰기
 metchingPostRouter.post("/", async (req, res, next) => {
   const postContent = req.body;
-
+  console.log('라우터단 : ',postContent);
+  
+ 
   try {
     const users = await metchingPostService.postPost(postContent);
     res.status(200).json({ message: "게시글 작성 성공" });

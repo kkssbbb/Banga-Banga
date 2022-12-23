@@ -51,25 +51,34 @@ class MetchingPostService {
 
   //모집 게시글 작성
   async postPost(postContent) {
-    [postContent] = postContent;
+   [postContent] = postContent;
+
+    console.log("서비스단 : ",postContent.title);
+    
     const result = MatchingPosts.create({
       title: postContent.title,
-      content: postContent.content,
+      peopleNum: postContent.count,
       matchingLocation: postContent.matchingLocation,
       matchingTime: postContent.matchingTime,
+      cafeId : postContent.cafeId,
+      userId : postContent.userId,
     });
   }
-
+ 
   //모집 게시글 수정
   async updatePost(postid, patchPost) {
-    [patchPost] = patchPost;
-
+    [patchPost] = patchPost; 
+//title, peopleNum, matchStatus, matchingLocation, matchingTime, cafeId, userId
     MatchingPosts.update(
       {
         title: patchPost.title,
-        content: patchPost.content,
-        matching_location: patchPost.matchingLocation,
-        matching_time: patchPost.matchingTime,
+        peopleNum:patchPost.count,
+        themeName: patchPost.themeName,
+        matchStatus: patchPost.matchStatus,
+        matchingLocation: patchPost.matchingLocation,
+        matchingTime: patchPost.matchingTime,
+        cafeId:patchPost.cafeId,
+        userId:patchPost.userId,
       },
       {
         where: { MatchingPosts_id: postid },

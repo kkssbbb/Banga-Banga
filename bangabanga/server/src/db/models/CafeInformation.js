@@ -39,14 +39,15 @@ class CafeInformation extends Sequelize.Model {
           type: DataTypes.STRING,
           comment: "카페 홈페이지",  
         },
+      
+        lng: { 
+          type: DataTypes.STRING,
+          comment: "매장 경도",
+        },
         lat: { 
           type: DataTypes.STRING,
           comment: "매장 위도",
         }, 
-        lng: {
-          type: DataTypes.STRING,
-          comment: "매장 경도",
-        },
       },
       { 
         charset: "utf8mb4", // 한국어+이모티콘 설정!

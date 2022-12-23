@@ -20,6 +20,11 @@ class MatchingPosts extends Sequelize.Model {
           comment: "게시글내용",
           allowNull: false, //필수
         },
+        themeName: {
+          type: DataTypes.STRING(30),
+          comment: "해당카페 테마명",
+          allowNull: true, //필수
+        },
         matchStatus:{
           type: DataTypes.BOOLEAN,
           defaultValue: false,
