@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { metchingPostService, mapPostService } from "../services";
+import { metchingPostService, mapPostService,postingService } from "../services";
 
 const metchingPostRouter = Router();
 
@@ -22,9 +22,13 @@ metchingPostRouter.get("/map/:locationDetail", async (req, res, next) => {
 metchingPostRouter.get("/map/cafePost/:cafeId", async (req, res, next) => {
   const cafeId = req.params.cafeId;
   try {
-    const [recruitingInfo,cafeInfo] = await mapPostService.getCafePosts(cafeId);
+    const [recruitingInfo, cafeInfo] = await mapPostService.getCafePosts(
+      cafeId
+    );
 
-    res.status(200).json({"cafeInfo":cafeInfo[0],"recruitingInfo":recruitingInfo});
+    res
+      .status(200)
+      .json({ cafeInfo: cafeInfo[0], recruitingInfo: recruitingInfo });
   } catch (error) {
     next(error);
   }
@@ -78,9 +82,7 @@ metchingPostRouter.get(
 //모집 게시글 쓰기
 metchingPostRouter.post("/", async (req, res, next) => {
   const postContent = req.body;
-  console.log('라우터단 : ',postContent);
-  
- 
+
   try {
     const users = await metchingPostService.postPost(postContent);
     res.status(200).json({ message: "게시글 작성 성공" });
@@ -89,6 +91,34 @@ metchingPostRouter.post("/", async (req, res, next) => {
   }
 });
 
+//게시글 작성 중 지역 카페 List 조회api
+metchingPostRouter.get("/cafe-list/:locationDetail",
+  async (req, res, next) => {
+    
+    const locationDetail = req.params.locationDetail;
+
+    try {
+      const cafeList = await postingService.getCafeList(locationDetail);
+      res.status(200).json(cafeList);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+//게시글 작성 중 지역 카페 테마정보 조회api
+metchingPostRouter.get("/cafe-infomation/:cafeId",
+  async (req, res, next) => {
+
+    const cafeId = req.params.cafeId;
+
+    try {
+      const cafeInformation = await postingService.getCafeThemeInfomation(cafeId);
+      res.status(200).json(cafeInformation);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 //게시글 수정하기
 metchingPostRouter.patch("/:matching_post_id", async (req, res, next) => {
   try {
