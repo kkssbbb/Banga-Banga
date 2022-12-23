@@ -48,7 +48,7 @@ usersRouter.post("/login", async function (req, res, next) {
   }
 });
 
-usersRouter.patch("/:userId", loginRequired, async (req, res, next) => {
+usersRouter.patch("/:userId", async (req, res, next) => {
   try {
     const {
       role,
@@ -64,12 +64,11 @@ usersRouter.patch("/:userId", loginRequired, async (req, res, next) => {
       preferenceTheme,
       nonPreferenceTheme,
       preferenceLocation,
-      ratingScore,
       escapeScore,
       matchingCount,
-      mannerEvaluate,
+      mannerScore,
     } = req.body;
-    const userId = req.params.id;
+    const userId = req.params.userId;
     const { checkPassword } = req.body;
     // const user = userService.getUserById(user_id);
     // user.user_name = req.body.user_name;
@@ -91,9 +90,8 @@ usersRouter.patch("/:userId", loginRequired, async (req, res, next) => {
       ...(preferenceTheme && { preferenceTheme }),
       ...(nonPreferenceTheme && { nonPreferenceTheme }),
       ...(preferenceLocation && { preferenceLocation }),
-      ...(ratingScore && { ratingScore }),
       ...(matchingCount && { matchingCount }),
-      ...(mannerEvaluate && { mannerEvaluate }),
+      ...(mannerScore && { mannerScore }),
       ...(escapeScore && { escapeScore }),
     };
     const updateUserInfo = await userService.updateUser(

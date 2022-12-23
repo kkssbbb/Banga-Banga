@@ -65,11 +65,6 @@ class User extends Sequelize.Model {
           type: DataTypes.STRING(200),
           allowNull: true,
         },
-        ratingScore: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-          defaultValue: 0,
-        },
         tier: {
           type: DataTypes.STRING(20),
           allowNull: false,
@@ -85,7 +80,7 @@ class User extends Sequelize.Model {
           allowNull: false,
           defaultValue: 0,
         },
-        mannerEvaluate: {
+        mannerScore: {
           type: DataTypes.INTEGER,
           allowNull: false,
           defaultValue: 50,

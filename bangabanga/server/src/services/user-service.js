@@ -34,17 +34,17 @@ class UserService {
       throw new Error("가입 내역이 없습니다.");
     }
     const hashedPassword = user.password;
-    // const isPasswordSame = await bcrypt.compare(checkPassword, hashedPassword);
+    const isPasswordSame = await bcrypt.compare(checkPassword, hashedPassword);
 
-    // if (!isPasswordSame) {
-    //   throw new Error("비밀번호가 일치하지 않습니다.");
-    // }
-    // const { password } = updateData;
-    // if (password) {
-    //   const newHashedPassword = await bcrypt.hash(password, 10);
-    //   updateData.password = newHashedPassword;
-    //   console.log(newHashedPassword);
-    // }
+    if (!isPasswordSame) {
+      throw new Error("비밀번호가 일치하지 않습니다.");
+    }
+    const { password } = updateData;
+    if (password) {
+      const newHashedPassword = await bcrypt.hash(password, 10);
+      updateData.password = newHashedPassword;
+      console.log(newHashedPassword);
+    }
     const { escapeScore } = updateData;
     console.log(updateData.escapeScore);
     if (escapeScore) {
@@ -149,7 +149,15 @@ class UserService {
   async getUserById(id) {
     const user = await User.findOne({
       // where: { user_id: id },
-      where: { user_id: id },
+      where: { userId: id },
+      // attributes: ['user_id'],
+    });
+    return user;
+  }
+  async getUserByEmail(email) {
+    const user = await User.findOne({
+      // where: { user_id: id },
+      where: { email: email },
       // attributes: ['user_id'],
     });
     return user;
