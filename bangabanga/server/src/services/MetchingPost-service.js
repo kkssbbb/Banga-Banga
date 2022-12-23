@@ -11,8 +11,10 @@ class MetchingPostService {
 
   //전체 게시글 조회  게시글 6개로 페이지네이션 -> 지역별로
   async getPosts(localDetail) {
-    const query = `select * from MatchingPost
-    where matchingLocation = "${localDetail}";
+    const query = `select C.address, M.* from MatchingPost M   
+    join CafeInformation C
+       ON C.cafeId = M.cafeId
+      where M.matchingLocation = "${localDetail}";
     `;
     const posts = await sequelize.query(query, {
       type: QueryTypes.SELECT,
