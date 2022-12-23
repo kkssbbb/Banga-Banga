@@ -59,11 +59,13 @@ class MetchingPostService {
     
     const result = MatchingPosts.create({
       title: postContent.title,
-      peopleNum: postContent.count,
+      peopleNum:postContent.peopleNum,
+      themeName: postContent.themeName,
+      matchStatus: postContent.matchStatus,
       matchingLocation: postContent.matchingLocation,
       matchingTime: postContent.matchingTime,
-      cafeId : postContent.cafeId,
-      userId : postContent.userId,
+      cafeId:postContent.cafeId,
+      userId:postContent.userId,
     });
   }
  
@@ -71,6 +73,8 @@ class MetchingPostService {
   async updatePost(postid, patchPost) {
     [patchPost] = patchPost; 
 //title, peopleNum, matchStatus, matchingLocation, matchingTime, cafeId, userId
+console.log(patchPost.peopleNum);
+
     MatchingPosts.update(
       {
         title: patchPost.title,
