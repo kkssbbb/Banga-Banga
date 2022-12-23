@@ -29,7 +29,7 @@ class OperationInformation extends Sequelize.Model {
           comment: "유형 자물쇠 형식인지",
         },
         theme: {
-          type: DataTypes.STRING(20),
+          type: DataTypes.STRING(100),
           comment: "테마",
         },
         recommendedNum: {

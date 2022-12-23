@@ -20,7 +20,6 @@ class TeamEvaluate extends Sequelize.Model {
         shortEvaluate: {
           type: DataTypes.STRING(300),
           allowNull: true,
-          defaultValue: "재미있었습니다!",
         },
         mannerEvaluate: {
           type: DataTypes.INTEGER,
