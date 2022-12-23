@@ -15,8 +15,8 @@ class MatchingPosts extends Sequelize.Model {
           comment: "제목",
           allowNull: false, //필수
         },
-        content: {
-          type: DataTypes.STRING(300),
+        peopleNum: {
+          type: DataTypes.INTEGER,
           comment: "게시글내용",
           allowNull: false, //필수
         },
