@@ -9,10 +9,20 @@ class MetchingPostService {
     this.MatchingPosts = model;
   }
 
-  //전체 게시글 조회  게시글 6개로 페이지네이션 -> 지역별로
-  async getPosts(localDetail) {
+  //전체 게시글  지역별로 조회
+  async getLocalDetailPosts(localDetail) {
     const query = `select * from MatchingPost
     where matchingLocation = "${localDetail}";
+    `;
+    const posts = await sequelize.query(query, {
+      type: QueryTypes.SELECT,
+    });
+    return posts;
+  }
+
+  // 전체 게시글 조회
+  async getPosts() {
+    const query = `select * from MatchingPost;
     `;
     const posts = await sequelize.query(query, {
       type: QueryTypes.SELECT,

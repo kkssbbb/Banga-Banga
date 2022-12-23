@@ -33,7 +33,17 @@ metchingPostRouter.get("/map/cafePost/:cafeId", async (req, res, next) => {
 metchingPostRouter.get("/:local_detail", async (req, res, next) => {
   let localDetail = req.params.local_detail;
   try {
-    const posts = await metchingPostService.getPosts(localDetail);
+    const posts = await metchingPostService.getLocalDetailPosts(localDetail);
+    res.status(200).json(posts);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//게시글 전체 조회
+metchingPostRouter.get("/", async (req, res, next) => {
+  try {
+    const posts = await metchingPostService.getPosts();
     res.status(200).json(posts);
   } catch (error) {
     next(error);
