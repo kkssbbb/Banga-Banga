@@ -25,8 +25,17 @@ class MatchingSituationService {
 
     return participants;
   }
-  //각 모집글 참여자 수
+  //각 모집글 참여자 정보
+  async getPostInfo(matchingPostsId) {
+    const query = `select * from MatchingSituation A JOIN MatchingPost B
+      on A.matchingPostsId =  B.matchingPostsId
+      where A.matchingPostsId = ${matchingPostsId}`;
+    const participants = await sequelize.query(query, {
+      type: QueryTypes.SELECT,
+    });
 
+    return participants;
+  }
   //나의 매칭 횟수()
   async getMyPostCount(userId) {
     const query = `select count(A.participantsId) as myMatchingCount from MatchingSituation A JOIN MatchingPost B
