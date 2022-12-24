@@ -4,9 +4,10 @@ import { userService } from "../services";
 
 const usersRouter = Router();
 
-usersRouter.get("/user", loginRequired, async (req, res, next) => {
+usersRouter.get("/user", async (req, res, next) => {
   try {
-    const userId = req.currentUserId;
+    // const userId = req.currentUserId;
+    const userId = 1;
     // console.log(userId);
     const currentUserInfo = await userService.getUserById(userId);
 
@@ -15,6 +16,18 @@ usersRouter.get("/user", loginRequired, async (req, res, next) => {
     next(err);
   }
 });
+
+// usersRouter.get("/user", loginRequired, async (req, res, next) => {
+//   try {
+//     const userId = req.currentUserId;
+//     // console.log(userId);
+//     const currentUserInfo = await userService.getUserById(userId);
+
+//     res.status(200).json(currentUserInfo);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 usersRouter.post("/", async (req, res, next) => {
   try {
@@ -42,13 +55,14 @@ usersRouter.post("/login", async function (req, res, next) {
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
     const userToken = await userService.getUserToken({ email, password });
 
+
     res.status(200).json(userToken);
   } catch (error) {
     next(error);
   }
 });
-
-usersRouter.patch("/:userId", loginRequired, async (req, res, next) => {
+//회원정보 수정
+usersRouter.patch("/:userId", async (req, res, next) => {
   try {
     const {
       role,
@@ -64,12 +78,11 @@ usersRouter.patch("/:userId", loginRequired, async (req, res, next) => {
       preferenceTheme,
       nonPreferenceTheme,
       preferenceLocation,
-      ratingScore,
       escapeScore,
       matchingCount,
-      mannerEvaluate,
+      mannerScore,
     } = req.body;
-    const userId = req.params.id;
+    const userId = req.params.userId;
     const { checkPassword } = req.body;
     // const user = userService.getUserById(user_id);
     // user.user_name = req.body.user_name;
@@ -81,9 +94,13 @@ usersRouter.patch("/:userId", loginRequired, async (req, res, next) => {
       ...(role && { role }),
       ...(userName && { userName }),
       ...(mobileNumber && { mobileNumber }),
+      ...(userName && { userName }),
+      ...(mobileNumber && { mobileNumber }),
       ...(email && { email }),
       ...(nickName && { nickName }),
+      ...(nickName && { nickName }),
       ...(password && { password }),
+      ...(userIntro && { userIntro }),
       ...(userIntro && { userIntro }),
       ...(gender && { gender }),
       ...(age && { age }),
@@ -91,9 +108,8 @@ usersRouter.patch("/:userId", loginRequired, async (req, res, next) => {
       ...(preferenceTheme && { preferenceTheme }),
       ...(nonPreferenceTheme && { nonPreferenceTheme }),
       ...(preferenceLocation && { preferenceLocation }),
-      ...(ratingScore && { ratingScore }),
       ...(matchingCount && { matchingCount }),
-      ...(mannerEvaluate && { mannerEvaluate }),
+      ...(mannerScore && { mannerScore }),
       ...(escapeScore && { escapeScore }),
     };
     const updateUserInfo = await userService.updateUser(
@@ -105,7 +121,7 @@ usersRouter.patch("/:userId", loginRequired, async (req, res, next) => {
     next(error);
   }
 });
-
+//회원정보 전체 조회
 usersRouter.get("/", async (req, res, next) => {
   try {
     const users = await userService.getUsers();
@@ -114,12 +130,12 @@ usersRouter.get("/", async (req, res, next) => {
     next(error);
   }
 });
-
+//회원 정보 삭제(update)
 usersRouter.delete("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
     await userService.deleteUser(id);
-    res.status(200).json({ message: "게시글 삭제 성공" });
+    res.status(200).json({ message: "회원 삭제 성공" });
   } catch (error) {
     next(error);
   }
