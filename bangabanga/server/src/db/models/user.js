@@ -34,7 +34,7 @@ class User extends Sequelize.Model {
           allowNull: false,
         },
         password: {
-          type: DataTypes.STRING(200),
+          type: DataTypes.STRING(500),
           allowNull: false,
         },
         userIntro: {
@@ -50,7 +50,7 @@ class User extends Sequelize.Model {
           allowNull: true,
         },
         mbti: {
-          type: DataTypes.STRING(200),
+          type: DataTypes.STRING(10),
           allowNull: true,
         },
         preferenceTheme: {

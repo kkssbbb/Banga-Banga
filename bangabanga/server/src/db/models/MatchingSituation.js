@@ -20,10 +20,6 @@ class MatchingSituation extends Sequelize.Model {
           defaultValue: false,
           comment: "평가 완료 여부",
         },
-        matchingPostId: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-        },
       },
       {
         charset: "utf8mb4", // 한국어+이모티콘 설정!

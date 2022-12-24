@@ -25,12 +25,26 @@ teamEvaluateRouter.post("/", async (req, res, next) => {
       const score = { mannerEvaluate, escapeEvaluate };
       await userService.updateScore(score, evaluateTargetId);
     });
-    res.status(200).json(evaluate)
+    res.status(200).json(evaluate);
 
     // const evaluate = await teamEvaluateService.addEvaluate(evaluateInfo);
     // res.status(200).json(evaluate);
     // const score = {mannerEvaluate, escapeEvaluate}
     // await userService.updateScore(score, evaluateTargetId)
+  } catch (error) {
+    next(error);
+  }
+});
+
+//나의 매칭 후기 보여주기
+teamEvaluateRouter.get("/shortevaluate", async (req, res, next) => {
+  try {
+    // const userId = req.currentUserId;
+    const userId = 5;
+    const myShortEvaluate = await teamEvaluateService.getMyShortEvaluate(
+      userId
+    );
+    res.status(200).json(myShortEvaluate);
   } catch (error) {
     next(error);
   }
