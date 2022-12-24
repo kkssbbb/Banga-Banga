@@ -6,14 +6,17 @@ class TeamEvaluateService {
     this.TeamEvaluate = model;
   }
   async addEvaluate(evaluate) {
- 
     const evaluates = await TeamEvaluate.create(evaluate);
 
     return evaluates;
   }
-  async getEvaluates() {}
-
- 
+  async getMyShortEvaluate(userId) {
+    const myShortEvaluate = await TeamEvaluate.findAll({
+      where: { evaluateTargetId: userId },
+      attributes: ["evaluateTargetId", "shortEvaluate", "createdAt", "evaluatorId"],
+    });
+    return myShortEvaluate;
+  }
 }
 
 const teamEvaluateService = new TeamEvaluateService(TeamEvaluate);
