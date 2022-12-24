@@ -5,6 +5,7 @@ import {
   metchingPostRouter,
   cafeInformationRouter,
   teamEvaluateRouter,
+  matchingSituationRouter,
 } from "./routers";
 import { sequelize } from "./db";
 import cors from "cors";
@@ -32,6 +33,7 @@ app.use("/api/users", usersRouter);
 app.use("/api/matching-posts", metchingPostRouter);
 app.use("/api/cafe-infos", cafeInformationRouter);
 app.use("/api/evaluates", teamEvaluateRouter);
+app.use("/api/matching-situation", matchingSituationRouter);
 
 app.use(errorHandler);
 
