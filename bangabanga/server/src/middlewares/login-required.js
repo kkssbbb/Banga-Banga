@@ -12,12 +12,16 @@ function loginRequired(req, res, next) {
     return;
   }
 
-
   try {
-    const secretKey = process.env.JWT_SECRET_KEY || "secret-key";
-    const jwtDecoded = jwt.verify(userToken, secretKey);
+    const accessKey = process.env.ACCESS_SECRET || "access-key";
+    // console.log(accessKey);
+    const jwtDecoded = jwt.verify(userToken, accessKey);
+    console.log(jwtDecoded);
+    // console.log('유저토큰');
+    // console.log(userToken);
 
     const userId = jwtDecoded.userId;
+    // console.log(userId);
 
     req.currentUserId = userId;
 
