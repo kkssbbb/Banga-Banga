@@ -15,7 +15,7 @@ class MatchingSituation extends Sequelize.Model {
           defaultValue: 0,
           commet: "모집현황 수",
         },
-        isFinish: {
+        isEvaluate: {
           type: DataTypes.BOOLEAN,
           defaultValue: false,
           comment: "평가 완료 여부",
@@ -34,6 +34,12 @@ class MatchingSituation extends Sequelize.Model {
     db.MatchingSituation.belongsTo(db.MatchingPosts, {
       foreignKey: "matchingPostsId",
       sourceKey: "matchingPostsId",
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    });
+    db.MatchingSituation.belongsTo(db.User, {
+      foreignKey: "userId",
+      sourceKey: "userId",
       onDelete: "cascade",
       onUpdate: "cascade",
     });

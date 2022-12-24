@@ -4,7 +4,8 @@ import { userService } from "../services";
 
 const usersRouter = Router();
 
-usersRouter.get("/user", async (req, res, next) => {
+//유저 정보 조회
+usersRouter.get("/user", loginRequired, async (req, res, next) => {
   try {
     // const userId = req.currentUserId;
     const userId = 1;
@@ -55,7 +56,6 @@ usersRouter.post("/login", async function (req, res, next) {
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
     const userToken = await userService.getUserToken({ email, password });
 
-
     res.status(200).json(userToken);
   } catch (error) {
     next(error);
@@ -81,6 +81,7 @@ usersRouter.patch("/:userId", async (req, res, next) => {
       escapeScore,
       matchingCount,
       mannerScore,
+      profileImg,
     } = req.body;
     const userId = req.params.userId;
     const { checkPassword } = req.body;
@@ -111,6 +112,7 @@ usersRouter.patch("/:userId", async (req, res, next) => {
       ...(matchingCount && { matchingCount }),
       ...(mannerScore && { mannerScore }),
       ...(escapeScore && { escapeScore }),
+      ...(profileImg && { profileImg }),
     };
     const updateUserInfo = await userService.updateUser(
       userInfoRequired,

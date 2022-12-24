@@ -41,13 +41,13 @@ class TeamEvaluate extends Sequelize.Model {
       }
     );
   }
-
-  // static associate(db) {
-  //   db.User.hasMany(db.Matching, {
-  //     foreignkey: "create_id",
-  //     sourceKey: "user_id",
-  //     onUpdate: "cascade",
-  //   });
-  // }
+  static associate(db) {
+    db.TeamEvaluate.belongsTo(db.User, {
+      foreignKey: "userId",
+      sourceKey: "userId",
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    });
+  }
 }
 export { TeamEvaluate };
