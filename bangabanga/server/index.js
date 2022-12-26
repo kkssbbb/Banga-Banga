@@ -7,7 +7,7 @@ db.sequelize
   .sync()
   .then(() => {
     console.log("DB 연결 성공");
-    app.listen(3008);
+    app.listen(process.env.PORT);
     const PORT = process.env.PORT || 3008;
     console.log(`서버 정상 실행 http://localhost:${PORT}`);
   })
