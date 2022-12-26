@@ -189,6 +189,14 @@ class UserService {
   }
   async getUserByEmail(email) {
     const user = await User.findOne({
+      // where: { user_idz: id },
+      where: { userId: id },
+      // attributes: ['user_id'],
+    });
+    return user;
+  }
+  async getUserByEmail(email) {
+    const user = await User.findOne({
       // where: { user_id: id },
       where: { email: email },
       // attributes: ['user_id'],
