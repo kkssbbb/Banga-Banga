@@ -13,5 +13,5 @@ db.sequelize
   })
   .catch((err) => {
     console.log("연결 실패");
-    console.log(err);
+    console.log(err); 
   });

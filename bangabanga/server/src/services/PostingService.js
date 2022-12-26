@@ -18,7 +18,7 @@ class PostingService {
   }
 
   async getCafeThemeInfomation(cafeId) {
-    const query = ` select operationInformationId, time, review, activity, category, theme, recommendedNum, genre, dificurty from  OperationInformation
+    const query = ` select operationInformationId, time, review, activity, category, theme, recommendedNum, genre, difficulty from  OperationInformation
     where  cafeId =  ${cafeId}; `
 
     const cafeInformation = await sequelize.query(query, {type: QueryTypes.SELECT})
