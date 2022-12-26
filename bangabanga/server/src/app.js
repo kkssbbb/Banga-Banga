@@ -29,10 +29,10 @@ app.use(express.urlencoded({ extended: false }));
 // html, css, js 라우팅
 // app.use(viewsRouter);
 
-app.use("/api/users", usersRouter);
+app.use("/api/user", usersRouter);
 app.use("/api/matching-posts", metchingPostRouter);
 app.use("/api/cafe-infos", cafeInformationRouter);
-app.use("/api/evaluates", teamEvaluateRouter);
+app.use("/api/evaluate", teamEvaluateRouter);
 app.use("/api/matching-situation", matchingSituationRouter);
 
 app.use(errorHandler);

@@ -6,6 +6,7 @@ const teamEvaluateRouter = Router();
 teamEvaluateRouter.post("/", async (req, res, next) => {
   try {
     const evaluateDatas = req.body;
+    const userId = evaluateDatas[0].evaluatorId;
     const evaluate = evaluateDatas.forEach(async (evaluateData) => {
       const {
         evaluateTargetId,
@@ -25,7 +26,9 @@ teamEvaluateRouter.post("/", async (req, res, next) => {
       const score = { mannerEvaluate, escapeEvaluate };
       await userService.updateScore(score, evaluateTargetId);
     });
-    res.status(200).json(evaluate);
+    console.log(userId)
+    await userService.updateMannerScore(userId);
+    res.status(200).json({message : "팀원 평가 완료"});
 
     // const evaluate = await teamEvaluateService.addEvaluate(evaluateInfo);
     // res.status(200).json(evaluate);
@@ -37,10 +40,9 @@ teamEvaluateRouter.post("/", async (req, res, next) => {
 });
 
 //나의 매칭 후기 보여주기
-teamEvaluateRouter.get("/shortevaluate", async (req, res, next) => {
+teamEvaluateRouter.get("/shortevaluate", loginRequired, async (req, res, next) => {
   try {
-    // const userId = req.currentUserId;
-    const userId = 5;
+    const userId = req.currentUserId;
     const myShortEvaluate = await teamEvaluateService.getMyShortEvaluate(
       userId
     );

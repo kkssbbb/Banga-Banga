@@ -40,8 +40,8 @@ class OperationInformation extends Sequelize.Model {
           type: DataTypes.STRING(10),
           comment: "테마 장르",
         },
-        dificurty: {
-          type: DataTypes.INTEGER,
+        difficulty: {
+          type: DataTypes.STRING(10),
           comment: "테마 난이도",
         },
       },
