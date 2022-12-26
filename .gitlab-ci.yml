@@ -1,0 +1,3 @@
+git fetch origin
+git checkout "dev"
+git merge --no-ff "feature-be-UsersAPI"

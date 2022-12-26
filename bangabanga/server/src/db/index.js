@@ -41,9 +41,8 @@ db.ThemeImgAdress = ThemeImgAdress;
 db.ProfileImgAdress = ProfileImgAdress;
 db.TeamEvaluate = TeamEvaluate;
 
-
 User.init(sequelize);
-MatchingPosts.init(sequelize); 
+MatchingPosts.init(sequelize);
 MatchingSituation.init(sequelize);
 CafeInformation.init(sequelize);
 OperationInformation.init(sequelize);
@@ -57,5 +56,6 @@ CafeInformation.associate(db);
 OperationInformation.associate(db);
 MatchingPosts.associate(db);
 MatchingSituation.associate(db);
+TeamEvaluate.associate(db);
 User.associate(db);
 export { db, sequelize };
