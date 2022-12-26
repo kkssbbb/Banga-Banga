@@ -36,7 +36,7 @@ class MatchingPosts extends Sequelize.Model {
           allowNull: false, //필수
         },
         matchingTime: {
-          type: DataTypes.INTEGER,
+          type: DataTypes.BIGINT,
           comment: "접선시간",
           allowNull: false, //필수
         },

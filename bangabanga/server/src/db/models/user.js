@@ -34,7 +34,7 @@ class User extends Sequelize.Model {
           allowNull: false,
         },
         password: {
-          type: DataTypes.STRING(200),
+          type: DataTypes.STRING(500),
           allowNull: false,
         },
         userIntro: {
@@ -50,7 +50,7 @@ class User extends Sequelize.Model {
           allowNull: true,
         },
         mbti: {
-          type: DataTypes.STRING(200),
+          type: DataTypes.STRING(10),
           allowNull: true,
         },
         preferenceTheme: {
@@ -64,11 +64,6 @@ class User extends Sequelize.Model {
         preferenceLocation: {
           type: DataTypes.STRING(200),
           allowNull: true,
-        },
-        ratingScore: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-          defaultValue: 0,
         },
         tier: {
           type: DataTypes.STRING(20),
@@ -85,10 +80,14 @@ class User extends Sequelize.Model {
           allowNull: false,
           defaultValue: 0,
         },
-        mannerEvaluate: {
+        mannerScore: {
           type: DataTypes.INTEGER,
           allowNull: false,
           defaultValue: 50,
+        },
+        profileImg: {
+          type: DataTypes.TEXT,
+          allowNull: true,
         },
       },
       {
@@ -104,6 +103,22 @@ class User extends Sequelize.Model {
 
   static associate(db) {
     db.User.hasMany(db.MatchingPosts, {
+      foreignKey: "userId",
+      sourceKey: "userId",
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    });
+  }
+  static associate(db) {
+    db.User.hasMany(db.MatchingSituation, {
+      foreignKey: "userId",
+      sourceKey: "userId",
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    });
+  }
+  static associate(db) {
+    db.User.hasMany(db.TeamEvaluate, {
       foreignKey: "userId",
       sourceKey: "userId",
       onDelete: "cascade",
