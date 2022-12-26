@@ -68,7 +68,7 @@ class CafeInformation extends Sequelize.Model {
       onDelete: "cascade",
       onUpdate: "cascade",
     });
-    db.CafeInformation.hasMany(db.MatchingSituation, {
+    db.CafeInformation.hasMany(db.MatchingPosts, {
       foreignKey: "cafeId",
       sourceKey: "cafeId",
       onDelete: "cascade",

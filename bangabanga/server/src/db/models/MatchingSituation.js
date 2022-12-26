@@ -10,11 +10,6 @@ class MatchingSituation extends Sequelize.Model {
           primaryKey: true,
           comment: "모집현황ID",
         },
-        participantsId: {
-          type: DataTypes.INTEGER,
-          defaultValue: 0,
-          commet: "모집현황 수",
-        },
         isEvaluate: {
           type: DataTypes.BOOLEAN,
           defaultValue: false,
@@ -27,6 +22,7 @@ class MatchingSituation extends Sequelize.Model {
         collate: "utf8mb4_general_ci", // 한국어 설정
         tableName: "MatchingSituation", // 테이블 이름
         timestamps: true, // createAt & updateAt 활성화
+        paranoid: true,
       }
     );
   }
