@@ -56,12 +56,11 @@ class MatchingSituationService {
   async getMyPostCount(userId) {
     const query = `select count(A.userID) as myMatchingCount from MatchingSituation A JOIN MatchingPost B
       on A.matchingPostsId = B.matchingPostsId
-      where A.userId = ${userId} and A.deletedAt is NULL`; //A.isFinish가 1이 되어야 매칭완료 처리
+      where A.userId = ${userId} and B.matchStatus = 1 and A.deletedAt is NULL`; //A.isFinish가 1이 되어야 매칭완료 처리
 
     const participants = await sequelize.query(query, {
       type: QueryTypes.SELECT,
     });
-    console.log(participants);
     return participants;
   }
   //내가 참여한 게임 팀원 조회(본인을 제외하고 검색해야함)

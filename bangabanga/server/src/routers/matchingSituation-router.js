@@ -8,12 +8,7 @@ const matchingSituationRouter = Router();
 matchingSituationRouter.post("/", loginRequired, async (req, res, next) => {
   try {
     const userId = req.currentUserId;
-    // const { participantsId, matchingPostsId } = req.body;
     const { matchingPostsId } = req.body;
-    // const participantsInfo = {
-    //   participantsId,
-    //   matchingPostsId,
-    // };
     const participantsInfo = {
       userId,
       matchingPostsId,
@@ -26,32 +21,29 @@ matchingSituationRouter.post("/", loginRequired, async (req, res, next) => {
     next(error);
   }
 });
-matchingSituationRouter.patch("/:userId", async (req, res, next) => {
-  try {
-    const { userId } = req.params;
-    // const userId = 2;
-    // const { participantsId, matchingPostsId } = req.body;
-    const { matchingPostsId } = req.body;
-    // const participantsInfo = {
-    //   participantsId,
-    //   matchingPostsId,
-    // };
-    const participantsInfo = {
-      userId,
-      matchingPostsId,
-    };
-    const matchingSituation = await matchingSituationService.deleteParticipants(
-      participantsInfo
-    );
-    res.status(200).json({ matchingSituation, message: "신청취소 완료" });
-  } catch (error) {
-    next(error);
+//모집글 참여신청취소
+matchingSituationRouter.patch(
+  "/:matchingPostsId",
+  loginRequired,
+  async (req, res, next) => {
+    try {
+      const userId = req.currentUserId;
+      const { matchingPostsId } = req.params;
+      const participantsInfo = {
+        userId,
+        matchingPostsId,
+      };
+      const matchingSituation =
+        await matchingSituationService.deleteParticipants(participantsInfo);
+      res.status(200).json({ matchingSituation, message: "신청취소 완료" });
+    } catch (error) {
+      next(error);
+    }
   }
-});
-matchingSituationRouter.get("/", async (req, res, next) => {
+);
+matchingSituationRouter.get("/", loginRequired, async (req, res, next) => {
   try {
-    // const userId = req.currentUserId;
-    const userId = 12;
+    const userId = req.currentUserId;
     const myPostInfo = await matchingSituationService.getMyPostInfo(userId);
     res.status(200).json(myPostInfo);
   } catch (error) {
@@ -63,7 +55,6 @@ matchingSituationRouter.get(
   async (req, res, next) => {
     try {
       const { matchingPostsId } = req.params;
-      // const matchingPostsId = 7;
       const PostInfo = await matchingSituationService.getPostInfo(
         matchingPostsId
       );
@@ -73,23 +64,27 @@ matchingSituationRouter.get(
     }
   }
 );
-matchingSituationRouter.get("/count", async (req, res, next) => {
-  try {
-    // const userId = req.currentUserId;
-    const userId = 3;
-    const myPostInfo = await matchingSituationService.getMyPostCount(userId);
-    res.status(200).json(myPostInfo);
-  } catch (error) {
-    next(error);
+matchingSituationRouter.get(
+  "/count",
+  /*loginRequired,*/ async (req, res, next) => {
+    try {
+      // const userId = req.currentUserId;
+      const userId = 12;
+      const myPostInfo = await matchingSituationService.getMyPostCount(userId);
+      res.status(200).json(myPostInfo);
+      console.log(myPostInfo);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 matchingSituationRouter.get(
   "/myteam/:matchingPostId",
+  loginRequired,
   async (req, res, next) => {
     try {
-      //   const { matchingPostsId } = req.params;
-      const userId = 1;
-      const matchingPostsId = 1;
+      const { matchingPostsId } = req.params;
+      const userId = req.currentUserId;
       const participantsInfo = {
         userId,
         matchingPostsId,
@@ -103,15 +98,17 @@ matchingSituationRouter.get(
     }
   }
 );
-matchingSituationRouter.patch("/:userId", async (req, res, next) => {
-  try {
-    const { userId } = req.params;
-    const { matchingPostId } = req.body;
-    const updateInfo = { userId, matchingPostId };
-    const updateIsEvaluate = await matchingSituationService.updateIsEvaluate(
-      updateInfo
-    );
-    res.status(200).json({ message: "팀원 평가 여부 수정 성공" });
-  } catch {}
-});
+matchingSituationRouter.patch(
+  "/:matchingPostId",
+  loginRequired,
+  async (req, res, next) => {
+    try {
+      const userId = req.currentUserId;
+      const { matchingPostId } = req.params;
+      const updateInfo = { userId, matchingPostId };
+      await matchingSituationService.updateIsEvaluate(updateInfo);
+      res.status(200).json({ message: "팀원 평가 여부 수정 성공" });
+    } catch {}
+  }
+);
 export { matchingSituationRouter };

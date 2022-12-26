@@ -42,11 +42,11 @@ class User extends Sequelize.Model {
           allowNull: true,
         },
         gender: {
-          type: DataTypes.ENUM("남성", "여성"),
+          type: DataTypes.ENUM("남자", "여자"),
           allowNull: true,
         },
         age: {
-          type: DataTypes.ENUM("10대", "20대", "30대", "40대"),
+          type: DataTypes.ENUM("10대", "20대", "30대", "30대 이상"),
           allowNull: true,
         },
         mbti: {
