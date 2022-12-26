@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { loginRequired } from "../middlewares";
 import { metchingPostService, mapPostService,postingService } from "../services";
 
 const metchingPostRouter = Router();

@@ -53,7 +53,7 @@ class MapPostService {
     FROM MatchingPost P 
     join CafeInformation C
        ON C.cafeId = P.cafeId
-    where  P.cafeId = ${cafeId} and P.matchingTime > date_format(curdate(),'%Y%M%H%i' );`;
+    where  P.cafeId = ${cafeId} and P.matchingTime > date_format(curdate(),'%Y%M%H%i' )and matchStatus = 0;`;
 
     const query2 = ` SELECT cafeId, address, cafeName FROM  CafeInformation
     where  cafeId = ${cafeId} ;`;
