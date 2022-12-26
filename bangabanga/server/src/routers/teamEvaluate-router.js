@@ -40,10 +40,9 @@ teamEvaluateRouter.post("/", async (req, res, next) => {
 });
 
 //나의 매칭 후기 보여주기
-teamEvaluateRouter.get("/shortevaluate", async (req, res, next) => {
+teamEvaluateRouter.get("/shortevaluate", loginRequired, async (req, res, next) => {
   try {
-    // const userId = req.currentUserId;
-    const userId = 5;
+    const userId = req.currentUserId;
     const myShortEvaluate = await teamEvaluateService.getMyShortEvaluate(
       userId
     );

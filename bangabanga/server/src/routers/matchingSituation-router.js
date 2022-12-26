@@ -21,7 +21,6 @@ matchingSituationRouter.post("/", loginRequired, async (req, res, next) => {
     const matchingSituation = await matchingSituationService.addParticipants(
       participantsInfo
     );
-    await 
     res.status(200).json({ matchingSituation, message: "참여자 등록 성공" });
   } catch (error) {
     next(error);
@@ -29,7 +28,7 @@ matchingSituationRouter.post("/", loginRequired, async (req, res, next) => {
 });
 matchingSituationRouter.patch("/:userId", async (req, res, next) => {
   try {
-    const {userId} = req.params;
+    const { userId } = req.params;
     // const userId = 2;
     // const { participantsId, matchingPostsId } = req.body;
     const { matchingPostsId } = req.body;
@@ -52,7 +51,7 @@ matchingSituationRouter.patch("/:userId", async (req, res, next) => {
 matchingSituationRouter.get("/", async (req, res, next) => {
   try {
     // const userId = req.currentUserId;
-    const userId = 2;
+    const userId = 12;
     const myPostInfo = await matchingSituationService.getMyPostInfo(userId);
     res.status(200).json(myPostInfo);
   } catch (error) {

@@ -40,7 +40,6 @@ usersRouter.post("/login", async function (req, res, next) {
 usersRouter.get("/", loginRequired, async (req, res, next) => {
   try {
     const userId = req.currentUserId;
-    // const userId = 1; 테스트용
     const getUserIinfo = await userService.getUserById(userId);
 
     res.status(200).json(getUserIinfo);
