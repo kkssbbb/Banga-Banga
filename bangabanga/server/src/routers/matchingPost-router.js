@@ -81,7 +81,9 @@ metchingPostRouter.get(
 
 //모집 게시글 쓰기
 metchingPostRouter.post("/", async (req, res, next) => {
+
   const postContent = req.body;
+
 
   try {
     const users = await metchingPostService.postPost(postContent);
