@@ -27,7 +27,7 @@ class MapPostService {
     const query = ` SELECT  count(P.matchingPostsId) as recruitingNum, C.cafeId, C.cafeName, C.locationDetail ,C.lat, C.lng FROM CafeInformation C
     JOIN  MatchingPost P
       ON C.cafeId = P.cafeId
-      where C.locationDetail = "강남" and P.matchingTime > date_format(curdate(),'%Y%M%H%i' )and  matchStatus = 0
+      where C.locationDetail = "${locationDetail}" and P.matchingTime > date_format(curdate(),'%Y%M%H%i' )and  matchStatus = 0
         group by C.cafeId
       having count(C.cafeId);`;
     const matchingPosts = await sequelize.query(query, {
