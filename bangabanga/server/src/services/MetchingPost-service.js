@@ -24,8 +24,8 @@ class MetchingPostService {
 
   // 전체 게시글 조회
   async getPosts() {
-    const query = `select * from MatchingPost;
-    `;
+    const query = `SELECT C.address, C.cafeName ,M.* FROM MatchingPost M   
+    join CafeInformation C;`;
     const posts = await sequelize.query(query, {
       type: QueryTypes.SELECT,
     });
