@@ -24,10 +24,10 @@ class MapPostService {
     //  console.log('cafeInformations : ', cafeInformations);
     //  console.log('matchingPosts : ', matchingPosts);
 
-    const query = ` SELECT  count(C.cafeId) as recruitingNum, C.cafeId, C.cafeName, C.locationDetail ,C.lat, C.lng FROM CafeInformation C
-    JOIN  MatchingPost P 
+    const query = ` SELECT  count(P.matchingPostsId) as recruitingNum, C.cafeId, C.cafeName, C.locationDetail ,C.lat, C.lng FROM CafeInformation C
+    JOIN  MatchingPost P
       ON C.cafeId = P.cafeId
-      where C.locationDetail = '${locationDetail}' and P.matchingTime > date_format(curdate(),'%Y%M%H%i' )
+      where C.locationDetail = "${locationDetail}" and P.matchingTime > date_format(curdate(),'%Y%M%H%i' )and  matchStatus = 0
         group by C.cafeId
       having count(C.cafeId);`;
     const matchingPosts = await sequelize.query(query, {
@@ -53,7 +53,7 @@ class MapPostService {
     FROM MatchingPost P 
     join CafeInformation C
        ON C.cafeId = P.cafeId
-    where  P.cafeId = ${cafeId} and P.matchingTime > date_format(curdate(),'%Y%M%H%i' );`;
+    where  P.cafeId = ${cafeId} and P.matchingTime > date_format(curdate(),'%Y%M%H%i' )and matchStatus = 0;`;
 
     const query2 = ` SELECT cafeId, address, cafeName FROM  CafeInformation
     where  cafeId = ${cafeId} ;`;

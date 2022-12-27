@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { loginRequired } from "../middlewares";
 import { metchingPostService, mapPostService,postingService } from "../services";
 
 const metchingPostRouter = Router();
@@ -81,7 +82,9 @@ metchingPostRouter.get(
 
 //모집 게시글 쓰기
 metchingPostRouter.post("/", async (req, res, next) => {
+
   const postContent = req.body;
+
 
   try {
     const users = await metchingPostService.postPost(postContent);
