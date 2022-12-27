@@ -3,7 +3,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 class User extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
-      {
+      { 
         userId: {
           type: DataTypes.BIGINT,
           autoIncrement: true,
