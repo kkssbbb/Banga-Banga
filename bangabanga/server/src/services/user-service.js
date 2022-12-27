@@ -65,7 +65,7 @@ class UserService {
     const isPlatinum = (score) => {
       if (59 < score && score < 80) return true;
       return false;
-    };
+    }; 
     const isDiamond = (score) => {
       if (79 < score) return true;
       return false;

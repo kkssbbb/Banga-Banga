@@ -1,29 +1,41 @@
+import { Router } from "express";
+import { rmSync } from "fs";
 
-module.exports = app => {
-    const db = require("../models");
-    const Image = db.images;
-    const upload = require("../middleware/upload");
-    const fs = require("fs");
-    const multer = require("multer");
-  
-    var router = require("express").Router();
-  
-    router.post("/upload", upload, async (req, res, next) => {
-      try {
-        // blob형태를 base64로 변환
-        const imgData = fs
-          .readFileSync(`app${req.file.path.split("app")[1]}`)
-          .toString("base64");
-  
-        // db에 path 저장
-        await Image.create({ path: imgData });
-  
-        res.json({ path: imgData });
-      } catch (err) {
-        res.status(400).json({ success: false, message: err.message });
-      }
-    });
-  
-    app.use("/api/", router);
-  };
-   
+const multer = require("multer");
+const fs = require("fs");
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "../../uploads/");
+  },
+  filename: (req, file, callback) => {
+    callback(null, `${Date.now()}-${file.originalname}`);
+  },
+});
+const uploader = multer({ storage: storage });
+
+const multerRouter = Router();
+
+multerRouter.get("/img", (req, res, next) => {
+  res.render("index");
+});
+
+multerRouter.post(
+  "/img-upload",
+  uploader.single("imgFile"),
+  (req, res, next) => {
+    try {
+      console.log("업로드 라우터 호출");
+
+      const imgPath = `${req.file.path}`
+      const imgData = fs
+        .readFileSync(imgPath)
+        .toString("base64");
+      res.json({ path: imgData });
+
+    } catch (err) {
+      res.status(400).json({ success: false, message: err.message });
+    }
+  }
+);
+
+export { multerRouter };

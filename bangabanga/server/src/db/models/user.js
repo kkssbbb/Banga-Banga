@@ -86,8 +86,8 @@ class User extends Sequelize.Model {
           defaultValue: 50,
         },
         profileImg: {
-          type: DataTypes.TEXT,
-          allowNull: true,
+          type: DataTypes.BLOB("long"), //승빈 수정
+          allowNull: false,
         },
       },
       {
