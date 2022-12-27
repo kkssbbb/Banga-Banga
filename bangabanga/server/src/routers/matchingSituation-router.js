@@ -5,18 +5,18 @@ import { loginRequired } from "../middlewares";
 const matchingSituationRouter = Router();
 
 //모집글 참여신청
-matchingSituationRouter.post("/", loginRequired, async (req, res, next) => {
+matchingSituationRouter.post("/", async (req, res, next) => {
   try {
-    const userId = req.currentUserId;
+    // const userId = req.currentUserId;
+    const userId = 8;
+    // const { userId, matchingPostsId } = req.body;
     const { matchingPostsId } = req.body;
     const participantsInfo = {
       userId,
       matchingPostsId,
     };
-    const matchingSituation = await matchingSituationService.addParticipants(
-      participantsInfo
-    );
-    res.status(200).json({ matchingSituation, message: "참여자 등록 성공" });
+    await matchingSituationService.addParticipants(participantsInfo);
+    res.status(200).json({ message: "참여자 등록 성공" });
   } catch (error) {
     next(error);
   }
@@ -41,6 +41,23 @@ matchingSituationRouter.patch(
     }
   }
 );
+//방장 모집취소 기능
+matchingSituationRouter.post("/leader", async (req, res, next) => {
+  try {
+    const { userId, matchingPostsId } = req.body;
+    const participantsInfo = {
+      userId,
+      matchingPostsId,
+    };
+    const matchingSituation = await matchingSituationService.deleteParticipants(
+      participantsInfo
+    );
+    res.status(200).json({ matchingSituation, message: "신청취소 완료" });
+  } catch (error) {
+    next(error);
+  }
+});
+
 matchingSituationRouter.get("/", loginRequired, async (req, res, next) => {
   try {
     const userId = req.currentUserId;
@@ -64,10 +81,10 @@ matchingSituationRouter.get(
     }
   }
 );
-matchingSituationRouter.get("/count", loginRequired, async (req, res, next) => {
+matchingSituationRouter.get("/count", async (req, res, next) => {
   try {
-    // const userId = req.currentUserId;
-    const userId = 12;
+    const userId = req.currentUserId;
+    // const userId = 3;
     const myPostInfo = await matchingSituationService.getMyPostCount(userId);
     res.status(200).json(myPostInfo);
     console.log(myPostInfo);

@@ -23,9 +23,9 @@ class CafeInformationService {
     return cafeDatas;
   }
   async getCafesDetail(location) {
-    const cafeDatas = await CafeInformation.findAll({
-      where: { locationDetail: `${location}` },
-    });
+    const query = `select * from CafeInformation where locationDetail = "${location}"`;
+    const cafeDatas = await sequelize.query(query, { type: QueryTypes.SELECT });
+
     return cafeDatas;
   }
 }
