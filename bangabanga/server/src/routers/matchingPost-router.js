@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { loginRequired } from "../middlewares";
-import { metchingPostService, mapPostService,postingService } from "../services";
+import { metchingPostService, mapPostService,postingService,matchingSituationService } from "../services";
 
 const metchingPostRouter = Router();
 
@@ -87,7 +87,9 @@ metchingPostRouter.post("/", async (req, res, next) => {
 
 
   try {
-    const users = await metchingPostService.postPost(postContent);
+    const post = await metchingPostService.postPost(postContent);
+  await matchingSituationService.addParticipants( post.userId,post.matchingPostsId);
+  
     res.status(200).json({ message: "게시글 작성 성공" });
   } catch (error) {
     next(error);

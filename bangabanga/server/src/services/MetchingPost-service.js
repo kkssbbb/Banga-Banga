@@ -47,53 +47,51 @@ class MetchingPostService {
     const query = `select M.* ,C.cafeName from MatchingPost M
     join CafeInformation C
     where matchingPostsId = ${postId} and M.cafeId = C.cafeId;
-    ` 
+    `;
     const countQuery = ` update MatchingPost set view = view + 1 where matchingPostsId = ${postId};
-    `
+    `;
     sequelize.query(countQuery, { type: QueryTypes.UPDATE });
-    const result1 =  sequelize.query(query, { type: QueryTypes.SELECT });
+    const result1 = sequelize.query(query, { type: QueryTypes.SELECT });
 
- 
     return result1;
   }
 
   //모집 게시글 작성
   async postPost(postContent) {
-   
-  
-   //console.log(postContent);
-//  const [title,peopleNum,themeName,matchStatus,matchingLocation,matchingTime,cafeId,userId] = [postContent];
+    //console.log(postContent);
+    //  const [title,peopleNum,themeName,matchStatus,matchingLocation,matchingTime,cafeId,userId] = [postContent];
 
-    console.log("test : " ,postContent.title);
-    
     const result = MatchingPosts.create({
       title: postContent.title,
-      peopleNum:postContent.peopleNum,
+      peopleNum: postContent.peopleNum,
       themeName: postContent.themeName,
       matchStatus: postContent.matchStatus,
       matchingLocation: postContent.matchingLocation,
       matchingTime: postContent.matchingTime,
-      cafeId:postContent.cafeId,
-      userId:postContent.userId,
+      cafeId: postContent.cafeId,
+      userId: postContent.userId,
     });
+    // console.log(result);
+
+    return result;
   }
- 
+
   //모집 게시글 수정
   async updatePost(postid, patchPost) {
-    [patchPost] = patchPost; 
-//title, peopleNum, matchStatus, matchingLocation, matchingTime, cafeId, userId
-console.log(patchPost.peopleNum);
+    [patchPost] = patchPost;
+    //title, peopleNum, matchStatus, matchingLocation, matchingTime, cafeId, userId
+    console.log(patchPost.peopleNum);
 
     MatchingPosts.update(
       {
         title: patchPost.title,
-        peopleNum:patchPost.peopleNum,
+        peopleNum: patchPost.peopleNum,
         themeName: patchPost.themeName,
         matchStatus: patchPost.matchStatus,
         matchingLocation: patchPost.matchingLocation,
         matchingTime: patchPost.matchingTime,
-        cafeId:patchPost.cafeId,
-        userId:patchPost.userId,
+        cafeId: patchPost.cafeId,
+        userId: patchPost.userId,
       },
       {
         where: { MatchingPosts_id: postid },

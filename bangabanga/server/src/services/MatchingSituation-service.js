@@ -8,8 +8,9 @@ class MatchingSituationService {
     this.MatchingSituation = model;
   }
   //게임 참가
-  async addParticipants(participantsInfo) {
-    const { userId, matchingPostsId } = participantsInfo;
+  async addParticipants(userId,matchingPostsId) {;
+    
+    //const { userId, matchingPostsId } = participantsInfo;
     const insertData = { userId, matchingPostsId };
     const user = await MatchingSituation.findOne({
       where: {

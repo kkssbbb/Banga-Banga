@@ -25,8 +25,9 @@ multerRouter.post(
   (req, res, next) => {
     try {
       console.log("업로드 라우터 호출");
-
+      
       const imgPath = `${req.file.path}`
+      console.log(imgPath);
       const imgData = fs
         .readFileSync(imgPath)
         .toString("base64");
