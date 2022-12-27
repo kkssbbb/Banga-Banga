@@ -17,6 +17,7 @@ usersRouter.post("/", async (req, res, next) => {
     };
     const registerUser = await userService.addUser(userInfo);
     res.status(200).json(registerUser);
+    console.log(registerUser);
   } catch (error) {
     next(error);
   }
@@ -75,7 +76,7 @@ usersRouter.patch("/:userId", loginRequired, async (req, res, next) => {
     //확인용 패스워드
     const { checkPassword } = req.body;
     if (!checkPassword) {
-      throw new Error("정보를 변경하려면, 현재의 비밀번호가 필요합니다.");
+      throw new Error("비밀번호가 틀렸습니다. 비밀번호를 다시 확인해주세요.");
     }
 
     const userInfoRequired = { userId, checkPassword };

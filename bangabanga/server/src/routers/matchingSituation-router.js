@@ -64,20 +64,17 @@ matchingSituationRouter.get(
     }
   }
 );
-matchingSituationRouter.get(
-  "/count",
-  /*loginRequired,*/ async (req, res, next) => {
-    try {
-      // const userId = req.currentUserId;
-      const userId = 12;
-      const myPostInfo = await matchingSituationService.getMyPostCount(userId);
-      res.status(200).json(myPostInfo);
-      console.log(myPostInfo);
-    } catch (error) {
-      next(error);
-    }
+matchingSituationRouter.get("/count", loginRequired, async (req, res, next) => {
+  try {
+    // const userId = req.currentUserId;
+    const userId = 12;
+    const myPostInfo = await matchingSituationService.getMyPostCount(userId);
+    res.status(200).json(myPostInfo);
+    console.log(myPostInfo);
+  } catch (error) {
+    next(error);
   }
-);
+});
 matchingSituationRouter.get(
   "/myteam/:matchingPostId",
   loginRequired,

@@ -35,7 +35,7 @@ class MatchingSituationService {
   async getMyPostInfo(userId) {
     const query = `select * from MatchingSituation A join MatchingPost B
       on A.matchingPostsId =  B.matchingPostsId join Users C on A.userId = C.userId
-      where A.userId = ${userId} and A.isEvaluate = 0 and A.deletedAt is NULL`;
+      where A.userId = ${userId} and B.matchStatus = 1 and A.isEvaluate = 0 and A.deletedAt is NULL`;
     const participants = await sequelize.query(query, {
       type: QueryTypes.SELECT,
     });
