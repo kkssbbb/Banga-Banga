@@ -1,4 +1,5 @@
 import express from "express";
+const ejs = require('ejs');
 import { errorHandler } from "./middlewares";
 import {
   usersRouter,
@@ -6,13 +7,17 @@ import {
   cafeInformationRouter,
   teamEvaluateRouter,
   matchingSituationRouter,
+  multerRouter
 } from "./routers";
 import { sequelize } from "./db";
 import cors from "cors";
 
+
 const app = express();
 sequelize.sync();
 /* GET home page. */
+app.set('view engine', 'ejs');
+app.set('views', './views');
 
 app.get("/", async function (req, res, next) {
   res.send("hello, wolrd!");
@@ -34,6 +39,7 @@ app.use("/api/matching-posts", metchingPostRouter);
 app.use("/api/cafe-infos", cafeInformationRouter);
 app.use("/api/evaluate", teamEvaluateRouter);
 app.use("/api/matching-situation", matchingSituationRouter);
+app.use("/api/", multerRouter);
 
 app.use(errorHandler);
 
