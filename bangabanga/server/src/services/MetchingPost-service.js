@@ -44,11 +44,17 @@ class MetchingPostService {
 
   //클릭한 게시글 조회
   async getClickPost(postId) {
-    const result = MatchingPosts.findOne({
-      where: { matchingPostsId: postId },
-    }).then((MatchingPosts) => MatchingPosts.increment("view", { view: 1 }));
+    const query = `select M.* ,C.cafeName from MatchingPost M
+    join CafeInformation C
+    where matchingPostsId = ${postId} and M.cafeId = C.cafeId;
+    ` 
+    const countQuery = ` update MatchingPost set view = view + 1 where matchingPostsId = ${postId};
+    `
+    sequelize.query(countQuery, { type: QueryTypes.UPDATE });
+    const result1 =  sequelize.query(query, { type: QueryTypes.SELECT });
 
-    return result;
+ 
+    return result1;
   }
 
   //모집 게시글 작성
