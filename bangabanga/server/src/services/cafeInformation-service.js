@@ -9,9 +9,7 @@ class CafeInformationService {
     this.CafeInformation = model;
   }
   async getCafesAll() {
-    const query = `select * from CafeInformation
-    inner join OperationInformation
-    on CafeInformation.cafeId = OperationInformation.cafeId`;
+    const query = `select * from CafeInformation;`;
 
     const cafeDatas = await sequelize.query(query, { type: QueryTypes.SELECT });
 
@@ -23,9 +21,11 @@ class CafeInformationService {
     return cafeDatas;
   }
   async getCafesDetail(location) {
-    const cafeDatas = await CafeInformation.findAll({
-      where: { locationDetail: `${location}` },
-    });
+    const query = `select * from CafeInformation
+    where locationDetail = "${location}";`;
+
+    const cafeDatas = await sequelize.query(query, { type: QueryTypes.SELECT });
+
     return cafeDatas;
   }
 }

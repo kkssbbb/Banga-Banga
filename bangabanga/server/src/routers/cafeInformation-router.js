@@ -23,6 +23,8 @@ cafeInformationRouter.get("/cafeAll", async function (req, res, next) {
 cafeInformationRouter.get(
   "/cafeDetail/:location",
   async function (req, res, next) {
+    console.log('test');
+    
     // const location = req.params.page;
     const location = req.params.location;
     const cafeInfos = await cafeInformationService.getCafesDetail(location);
