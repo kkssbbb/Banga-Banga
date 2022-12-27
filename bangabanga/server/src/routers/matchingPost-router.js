@@ -1,6 +1,11 @@
 import { Router } from "express";
 import { loginRequired } from "../middlewares";
-import { metchingPostService, mapPostService,postingService,matchingSituationService } from "../services";
+import {
+  metchingPostService,
+  mapPostService,
+  postingService,
+  matchingSituationService,
+} from "../services";
 
 const metchingPostRouter = Router();
 
@@ -82,14 +87,17 @@ metchingPostRouter.get(
 
 //모집 게시글 쓰기
 metchingPostRouter.post("/", async (req, res, next) => {
-
   const postContent = req.body;
-
 
   try {
     const post = await metchingPostService.postPost(postContent);
-  await matchingSituationService.addParticipants( post.userId,post.matchingPostsId);
-  
+    const userId = post.userId;
+    const matchingPostsId = post.matchingPostsId;
+    const participatnsInfo = { userId, matchingPostsId };
+    const users = await matchingSituationService.addParticipants(
+      participatnsInfo
+    );
+
     res.status(200).json({ message: "게시글 작성 성공" });
     console.log(users)
   } catch (error) {
@@ -98,33 +106,27 @@ metchingPostRouter.post("/", async (req, res, next) => {
 });
 
 //게시글 작성 중 지역 카페 List 조회api
-metchingPostRouter.get("/cafe-list/:locationDetail",
-  async (req, res, next) => {
-    
-    const locationDetail = req.params.locationDetail;
+metchingPostRouter.get("/cafe-list/:locationDetail", async (req, res, next) => {
+  const locationDetail = req.params.locationDetail;
 
-    try {
-      const cafeList = await postingService.getCafeList(locationDetail);
-      res.status(200).json(cafeList);
-    } catch (error) {
-      next(error);
-    }
+  try {
+    const cafeList = await postingService.getCafeList(locationDetail);
+    res.status(200).json(cafeList);
+  } catch (error) {
+    next(error);
   }
-);
+});
 //게시글 작성 중 지역 카페 테마정보 조회api
-metchingPostRouter.get("/cafe-infomation/:cafeId",
-  async (req, res, next) => {
+metchingPostRouter.get("/cafe-infomation/:cafeId", async (req, res, next) => {
+  const cafeId = req.params.cafeId;
 
-    const cafeId = req.params.cafeId;
-
-    try {
-      const cafeInformation = await postingService.getCafeThemeInfomation(cafeId);
-      res.status(200).json(cafeInformation);
-    } catch (error) {
-      next(error);
-    }
+  try {
+    const cafeInformation = await postingService.getCafeThemeInfomation(cafeId);
+    res.status(200).json(cafeInformation);
+  } catch (error) {
+    next(error);
   }
-);
+});
 //게시글 수정하기
 metchingPostRouter.patch("/:matching_post_id", async (req, res, next) => {
   try {

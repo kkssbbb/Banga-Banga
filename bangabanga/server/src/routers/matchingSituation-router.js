@@ -5,7 +5,7 @@ import { loginRequired } from "../middlewares";
 const matchingSituationRouter = Router();
 
 //모집글 참여신청
-matchingSituationRouter.post("/", loginRequired, async (req, res, next) => {
+matchingSituationRouter.post("/", async (req, res, next) => {
   try {
     const userId = req.currentUserId;
     const { matchingPostsId } = req.body;
@@ -13,10 +13,8 @@ matchingSituationRouter.post("/", loginRequired, async (req, res, next) => {
       userId,
       matchingPostsId,
     };
-    const matchingSituation = await matchingSituationService.addParticipants(
-      participantsInfo
-    );
-    res.status(200).json({ matchingSituation, message: "참여자 등록 성공" });
+    await matchingSituationService.addParticipants(participantsInfo);
+    res.status(200).json({ message: "참여자 등록 성공" });
   } catch (error) {
     next(error);
   }
@@ -66,8 +64,8 @@ matchingSituationRouter.get(
 );
 matchingSituationRouter.get("/count", loginRequired, async (req, res, next) => {
   try {
-    // const userId = req.currentUserId;
-    const userId = 12;
+    const userId = req.currentUserId;
+    // const userId = 3;
     const myPostInfo = await matchingSituationService.getMyPostCount(userId);
     res.status(200).json(myPostInfo);
     console.log(myPostInfo);
