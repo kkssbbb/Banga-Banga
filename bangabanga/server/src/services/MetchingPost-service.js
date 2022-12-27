@@ -55,6 +55,7 @@ class MetchingPostService {
 
     return result1;
   }
+  
 
   //모집 게시글 작성
   async postPost(postContent) {
