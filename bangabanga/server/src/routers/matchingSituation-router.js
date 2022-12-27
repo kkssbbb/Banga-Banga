@@ -5,7 +5,7 @@ import { loginRequired } from "../middlewares";
 const matchingSituationRouter = Router();
 
 //모집글 참여신청
-matchingSituationRouter.post("/", async (req, res, next) => {
+matchingSituationRouter.post("/", loginRequired, async (req, res, next) => {
   try {
     const userId = req.currentUserId;
     const { matchingPostsId } = req.body;
@@ -30,6 +30,25 @@ matchingSituationRouter.patch(
       const participantsInfo = {
         userId,
         matchingPostsId,
+      };
+      const matchingSituation =
+        await matchingSituationService.deleteParticipants(participantsInfo);
+      res.status(200).json({ matchingSituation, message: "신청취소 완료" });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+//모집글 참여신청취소
+matchingSituationRouter.post(
+  "/leader",
+  loginRequired,
+  async (req, res, next) => {
+    try {
+      const { matchingPostsId, userId } = req.body;
+      const participantsInfo = {
+        matchingPostsId,
+        userId,
       };
       const matchingSituation =
         await matchingSituationService.deleteParticipants(participantsInfo);
