@@ -75,22 +75,17 @@ usersRouter.patch("/:userId", loginRequired, async (req, res, next) => {
     //확인용 패스워드
     const { checkPassword } = req.body;
     if (!checkPassword) {
-      throw new Error("정보를 변경하려면, 현재의 비밀번호가 필요합니다.");
+      throw new Error("비밀번호가 틀렸습니다. 비밀번호를 다시 확인해주세요.");
     }
-
     const userInfoRequired = { userId, checkPassword };
 
     const updateData = {
       ...(role && { role }),
       ...(userName && { userName }),
       ...(mobileNumber && { mobileNumber }),
-      ...(userName && { userName }),
-      ...(mobileNumber && { mobileNumber }),
       ...(email && { email }),
       ...(nickName && { nickName }),
-      ...(nickName && { nickName }),
       ...(password && { password }),
-      ...(userIntro && { userIntro }),
       ...(userIntro && { userIntro }),
       ...(gender && { gender }),
       ...(age && { age }),
@@ -123,7 +118,7 @@ usersRouter.patch("/:userId", loginRequired, async (req, res, next) => {
 // });
 
 //회원 정보 삭제/탈퇴(update)
-usersRouter.delete("/:userId", loginRequired, async (req, res, next) => {
+usersRouter.patch("/delete/:userId", async (req, res, next) => {
   try {
     const { userId } = req.params;
     await userService.deleteUser(userId);
@@ -133,16 +128,4 @@ usersRouter.delete("/:userId", loginRequired, async (req, res, next) => {
   }
 });
 
-//비밀번호 찾기(추후 구현)
-// usersRouter.post("/tempPassword", async (req, res, next) => {
-//   try {
-//     const { email } = req.body;
-    
-//     temporaryPassword = Math.random().toString(36).substring(2, 7);
-//     const { userId, temporaryPassword } = userInfo;
-//     await userService.updateTempPassword();
-//   } catch (error) {
-//     next(error);
-//   }
-// });
 export { usersRouter };

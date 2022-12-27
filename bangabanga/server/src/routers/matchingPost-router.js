@@ -91,6 +91,7 @@ metchingPostRouter.post("/", async (req, res, next) => {
   await matchingSituationService.addParticipants( post.userId,post.matchingPostsId);
   
     res.status(200).json({ message: "게시글 작성 성공" });
+    console.log(users)
   } catch (error) {
     next(error);
   }

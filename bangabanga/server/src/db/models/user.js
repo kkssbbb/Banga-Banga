@@ -42,11 +42,11 @@ class User extends Sequelize.Model {
           allowNull: true,
         },
         gender: {
-          type: DataTypes.ENUM("남성", "여성"),
+          type: DataTypes.ENUM("남자", "여자"),
           allowNull: true,
         },
         age: {
-          type: DataTypes.ENUM("10대", "20대", "30대", "40대"),
+          type: DataTypes.ENUM("10대", "20대", "30대", "30대 이상"),
           allowNull: true,
         },
         mbti: {
@@ -87,7 +87,7 @@ class User extends Sequelize.Model {
         },
         profileImg: {
           type: DataTypes.BLOB("long"), //승빈 수정
-          allowNull: false,
+          allowNull: true,
         },
       },
       {

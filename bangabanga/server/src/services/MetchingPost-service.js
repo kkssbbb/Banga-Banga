@@ -59,9 +59,13 @@ class MetchingPostService {
 
   //모집 게시글 작성
   async postPost(postContent) {
-    //console.log(postContent);
-    //  const [title,peopleNum,themeName,matchStatus,matchingLocation,matchingTime,cafeId,userId] = [postContent];
+   
+  
+   //console.log(postContent);
+//  const [title,peopleNum,themeName,matchStatus,matchingLocation,matchingTime,cafeId,userId] = [postContent];
 
+    console.log("test : " ,postContent.title);
+    
     const result = MatchingPosts.create({
       title: postContent.title,
       peopleNum: postContent.peopleNum,
