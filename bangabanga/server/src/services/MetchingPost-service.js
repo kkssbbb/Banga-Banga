@@ -13,8 +13,8 @@ class MetchingPostService {
   async getLocalDetailPosts(localDetail) {
     const query = `SELECT count(MS.matchingPostsId) as matchingSituationUserSum , C.address, C.cafeName ,M.* FROM MatchingPost M  
     join MatchingSituation MS  on MS.matchingPostsId  = M.matchingPostsId 
-        join CafeInformation C where M.cafeId = C.cafeId and M.matchingLocation = "${localDetail}"
-        group by MS.matchingPostsId;;
+        join CafeInformation C where M.cafeId = C.cafeId and M.matchingLocation = "${localDetail}" and MS.deletedAt is null
+          group by MS.matchingPostsId;
     `;
     const posts = await sequelize.query(query, {
       type: QueryTypes.SELECT,
@@ -26,7 +26,7 @@ class MetchingPostService {
   async getPosts() {
     const query = `SELECT count(MS.matchingPostsId) as matchingSituationUserSum , C.address, C.cafeName ,M.* FROM MatchingPost M  
     join MatchingSituation MS  on MS.matchingPostsId  = M.matchingPostsId 
-        join CafeInformation C where M.cafeId = C.cafeId
+        join CafeInformation C where M.cafeId = C.cafeId and MS.deletedAt is null
         group by MS.matchingPostsId;`;
     const posts = await sequelize.query(query, {
       type: QueryTypes.SELECT,

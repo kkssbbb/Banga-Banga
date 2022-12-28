@@ -53,7 +53,7 @@ class MapPostService {
      FROM MatchingPost P 
      join MatchingSituation MS  on MS.matchingPostsId  = P.matchingPostsId 
      join CafeInformation C ON C.cafeId = P.cafeId
-     where  P.cafeId = ${cafeId} and P.matchingTime > date_format(curdate(),'%Y%M%H%i' )and matchStatus = 0;`;
+     where  P.cafeId = ${cafeId} and P.matchingTime > date_format(curdate(),'%Y%M%H%i' )and matchStatus = 0 and MS.deletedAt is null;`;
 
     const query2 = ` SELECT cafeId, address, cafeName FROM  CafeInformation
     where  cafeId = ${cafeId} ;`;
