@@ -39,7 +39,7 @@ matchingSituationRouter.patch(
     }
   }
 );
-//모집글 참여신청취소
+//방장이 참여자 참여신청취소
 matchingSituationRouter.post(
   "/leader",
   loginRequired,
