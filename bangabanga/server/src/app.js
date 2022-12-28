@@ -23,7 +23,10 @@ app.get("/", async function (req, res, next) {
   res.send("hello, wolrd!");
 });
 // CORS 에러 방지
-app.use(cors());
+app.use(cors({
+  origin: true, // 출처 허용 옵션
+  credential: true // 사용자 인증이 필요한 리소스(쿠키 ..등) 접근
+}));
 
 // Content-Type: application/json 형태의 데이터를 인식하고 핸들링할 수 있게 함.
 app.use(express.json());
