@@ -5,7 +5,7 @@ const multer = require("multer");
 const fs = require("fs");
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, "../../uploads/");
+    callback(null, "./uploads/");
   },
   filename: (req, file, callback) => {
     callback(null, `${Date.now()}-${file.originalname}`);
@@ -19,24 +19,17 @@ multerRouter.get("/img", (req, res, next) => {
   res.render("index");
 });
 
-multerRouter.post(
-  "/img-upload",
-  uploader.single("imgFile"),
-  (req, res, next) => {
-    try {
-      console.log("업로드 라우터 호출");
-      
-      const imgPath = `${req.file.path}`
-      console.log(imgPath);
-      const imgData = fs
-        .readFileSync(imgPath)
-        .toString("base64");
-      res.json({ path: imgPath });
+multerRouter.post("/img-upload", uploader.single("imgFile"), (req, res, next) => {
+  try {
+    console.log("업로드 라우터 호출");
 
-    } catch (err) {
-      res.status(400).json({ success: false, message: err.message });
-    }
+    const imgPath = `${req.file.path}`;
+    console.log(imgPath);
+    const imgData = fs.readFileSync(imgPath).toString("base64");
+    res.json({ path: imgPath });
+  } catch (err) {
+    res.status(400).json({ success: false, message: err.message });
   }
-);
+});
 
 export { multerRouter };
