@@ -11,10 +11,10 @@ class MetchingPostService {
 
   //전체 게시글 조회  게시글 6개로 페이지네이션 -> 지역별로
   async getLocalDetailPosts(localDetail) {
-    const query = `SELECT C.address, C.cafeName ,M.* FROM MatchingPost M   
-    join CafeInformation C
-       ON C.cafeId = M.cafeId
-      where M.matchingLocation = "${localDetail}";
+    const query = `SELECT count(MS.matchingPostsId) as matchingSituationUserSum , C.address, C.cafeName ,M.* FROM MatchingPost M  
+    join MatchingSituation MS  on MS.matchingPostsId  = M.matchingPostsId 
+        join CafeInformation C where M.cafeId = C.cafeId and M.matchingLocation = "${localDetail}"
+        group by MS.matchingPostsId;;
     `;
     const posts = await sequelize.query(query, {
       type: QueryTypes.SELECT,
@@ -24,8 +24,10 @@ class MetchingPostService {
 
   // 전체 게시글 조회
   async getPosts() {
-    const query = `SELECT C.address, C.cafeName ,M.* FROM MatchingPost M   
-    join CafeInformation C where M.cafeId = C.cafeId`;
+    const query = `SELECT count(MS.matchingPostsId) as matchingSituationUserSum , C.address, C.cafeName ,M.* FROM MatchingPost M  
+    join MatchingSituation MS  on MS.matchingPostsId  = M.matchingPostsId 
+        join CafeInformation C where M.cafeId = C.cafeId
+        group by MS.matchingPostsId;`;
     const posts = await sequelize.query(query, {
       type: QueryTypes.SELECT,
     });
