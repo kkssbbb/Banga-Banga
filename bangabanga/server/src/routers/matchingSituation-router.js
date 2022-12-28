@@ -62,7 +62,7 @@ matchingSituationRouter.post(
 matchingSituationRouter.get("/", loginRequired, async (req, res, next) => {
   try {
     const userId = req.currentUserId;
-    const myPostInfo = await matchingSituationService.getMyFinishedPostInfo(
+    const myPostInfo = await matchingSituationService.getMyFinishedPostsInfo(
       userId
     );
     res.status(200).json(myPostInfo);
@@ -74,7 +74,7 @@ matchingSituationRouter.get("/", loginRequired, async (req, res, next) => {
 matchingSituationRouter.get("/posts", loginRequired, async (req, res, next) => {
   try {
     const userId = req.currentUserId;
-    const myPostInfo = await matchingSituationService.getMyNotFinishedPostInfo(
+    const myPostInfo = await matchingSituationService.getMyNotFinishedPostsInfo(
       userId
     );
     res.status(200).json(myPostInfo);

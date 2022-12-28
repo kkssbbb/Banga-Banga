@@ -65,7 +65,7 @@ class UserService {
     const isPlatinum = (score) => {
       if (59 < score && score < 80) return true;
       return false;
-    }; 
+    };
     const isDiamond = (score) => {
       if (79 < score) return true;
       return false;
@@ -93,6 +93,14 @@ class UserService {
     if (!user) {
       throw new Error("회원 정보가 없습니다.");
     }
+    user.mannerScore += 1;
+    user.save();
+    return user;
+  }
+  async updateManner(userId) {
+    const user = await User.findOne({
+      where: { userId: userId },
+    });
     user.mannerScore += 1;
     user.save();
     return user;

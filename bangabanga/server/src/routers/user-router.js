@@ -41,7 +41,7 @@ usersRouter.get("/", async (req, res, next) => {
   try {
     const userId = req.currentUserId;
     const getUserIinfo = await userService.getUserById(userId);
-
+    
     res.status(200).json(getUserIinfo);
   } catch (err) {
     next(err);
