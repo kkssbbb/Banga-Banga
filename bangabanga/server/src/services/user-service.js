@@ -176,7 +176,7 @@ class UserService {
     const accessToken = jwt.sign(
       { userId: user.userId, role: user.role },
       accessKey,
-      { expiresIn: "3h", httpOnly: true, secure: true, sameSite: "none" }
+      { expiresIn: "3h" }
     );
     const refreshKey = process.env.REFRESH_SECRET || "refresh-key";
     const refreshToken = jwt.sign(
