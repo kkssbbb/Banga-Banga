@@ -31,11 +31,22 @@ class MatchingSituationService {
     });
     return participants;
   }
-  //내가 참여한 모집글 정보 조회(아직 모집 중인 게시물 포함 검색)
-  async getMyPostInfo(userId) {
+  //내가 참여한 모집글 정보 조회(모집 완료 된 것))
+  async getMyFinishedPostsInfo(userId) {
     const query = `select * from MatchingSituation A join MatchingPost B
       on A.matchingPostsId =  B.matchingPostsId join Users C on A.userId = C.userId
       where A.userId = ${userId} and B.matchStatus = 1 and A.isEvaluate = 0 and A.deletedAt is NULL`;
+    const participants = await sequelize.query(query, {
+      type: QueryTypes.SELECT,
+    });
+
+    return participants;
+  }
+  //내가 참여한 모집글 정보 조회(모집 중인 것)
+  async getMyNotFinishedPostsInfo(userId) {
+    const query = `select * from MatchingSituation A join MatchingPost B
+      on A.matchingPostsId =  B.matchingPostsId join Users C on A.userId = C.userId
+      where A.userId = ${userId} and B.matchStatus = 0 and A.isEvaluate = 0 and A.deletedAt is NULL`;
     const participants = await sequelize.query(query, {
       type: QueryTypes.SELECT,
     });

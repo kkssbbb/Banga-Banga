@@ -58,10 +58,25 @@ matchingSituationRouter.post(
     }
   }
 );
+//내가 참여한 모집글 정보 조회(모집 중인 것)
 matchingSituationRouter.get("/", loginRequired, async (req, res, next) => {
   try {
     const userId = req.currentUserId;
-    const myPostInfo = await matchingSituationService.getMyPostInfo(userId);
+    const myPostInfo = await matchingSituationService.getMyFinishedPostInfo(
+      userId
+    );
+    res.status(200).json(myPostInfo);
+  } catch (error) {
+    next(error);
+  }
+});
+//각 모집글 참여자 정보
+matchingSituationRouter.get("/posts", loginRequired, async (req, res, next) => {
+  try {
+    const userId = req.currentUserId;
+    const myPostInfo = await matchingSituationService.getMyNotFinishedPostInfo(
+      userId
+    );
     res.status(200).json(myPostInfo);
   } catch (error) {
     next(error);

@@ -105,7 +105,7 @@ class MetchingPostService {
   //모집 게시글 삭제
   async deletePost(postId) {
     MatchingPosts.destroy({
-      where: { MatchingPosts_id: postId },
+      where: { matchingPostsId: postId },
     });
   }
 }
