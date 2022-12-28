@@ -99,7 +99,7 @@ metchingPostRouter.post("/", async (req, res, next) => {
     );
 
     res.status(200).json({ message: "게시글 작성 성공" });
-    console.log(users)
+    console.log(users);
   } catch (error) {
     next(error);
   }

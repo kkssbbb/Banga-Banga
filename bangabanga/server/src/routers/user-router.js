@@ -37,7 +37,7 @@ usersRouter.post("/login", async function (req, res, next) {
 });
 
 //유저 정보 조회
-usersRouter.get("/", loginRequired, async (req, res, next) => {
+usersRouter.get("/", async (req, res, next) => {
   try {
     const userId = req.currentUserId;
     const getUserIinfo = await userService.getUserById(userId);
@@ -73,10 +73,10 @@ usersRouter.patch("/:userId", loginRequired, async (req, res, next) => {
     const userId = req.params.userId;
 
     //확인용 패스워드
-    const { checkPassword } = req.body;
-    if (!checkPassword) {
-      throw new Error("비밀번호가 틀렸습니다. 비밀번호를 다시 확인해주세요.");
-    }
+    // const { checkPassword } = req.body;
+    // if (!checkPassword) {
+    //   throw new Error("비밀번호가 틀렸습니다. 비밀번호를 다시 확인해주세요.");
+    // }
     const userInfoRequired = { userId, checkPassword };
 
     const updateData = {
