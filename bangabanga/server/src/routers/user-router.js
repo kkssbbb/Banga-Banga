@@ -41,13 +41,22 @@ usersRouter.get("/", async (req, res, next) => {
   try {
     const userId = req.currentUserId;
     const getUserIinfo = await userService.getUserById(userId);
-    
+
     res.status(200).json(getUserIinfo);
   } catch (err) {
     next(err);
   }
 });
-
+//매칭카운트 1씩 상승
+usersRouter.post("/manner", async (req, res, next) => {
+  const { userId } = req.body;
+  try {
+    const userMannerUp = await userService.updateManner(userId);
+    res.status(200).json(userMannerUp);
+  } catch (err) {
+    next(err);
+  }
+});
 //회원정보 수정
 usersRouter.patch("/:userId", loginRequired, async (req, res, next) => {
   try {

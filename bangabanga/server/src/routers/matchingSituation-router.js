@@ -70,7 +70,7 @@ matchingSituationRouter.get("/", loginRequired, async (req, res, next) => {
     next(error);
   }
 });
-//각 모집글 참여자 정보
+//내가 참여한 모집글 정보 조회(모집 완료 된 것)
 matchingSituationRouter.get("/posts", loginRequired, async (req, res, next) => {
   try {
     const userId = req.currentUserId;
@@ -137,7 +137,9 @@ matchingSituationRouter.patch(
       const updateInfo = { userId, matchingPostId };
       await matchingSituationService.updateIsEvaluate(updateInfo);
       res.status(200).json({ message: "팀원 평가 여부 수정 성공" });
-    } catch {}
+    } catch (error) {
+      next(error);
+    }
   }
 );
 export { matchingSituationRouter };

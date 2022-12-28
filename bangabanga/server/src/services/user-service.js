@@ -101,7 +101,7 @@ class UserService {
     const user = await User.findOne({
       where: { userId: userId },
     });
-    user.mannerScore += 1;
+    user.matchingCount += 1;
     user.save();
     return user;
   }
@@ -176,7 +176,7 @@ class UserService {
     const accessToken = jwt.sign(
       { userId: user.userId, role: user.role },
       accessKey,
-      { expiresIn: "1h" }
+      { expiresIn: "3h", httpOnly: true, secure: true, sameSite: "none" }
     );
     const refreshKey = process.env.REFRESH_SECRET || "refresh-key";
     const refreshToken = jwt.sign(
