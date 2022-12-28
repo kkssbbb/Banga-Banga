@@ -37,7 +37,7 @@ usersRouter.post("/login", async function (req, res, next) {
 });
 
 //유저 정보 조회
-usersRouter.get("/", async (req, res, next) => {
+usersRouter.get("/", loginRequired, async (req, res, next) => {
   try {
     const userId = req.currentUserId;
     const getUserIinfo = await userService.getUserById(userId);
