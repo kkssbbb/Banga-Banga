@@ -31,7 +31,7 @@ multerRouter.post(
       const imgData = fs
         .readFileSync(imgPath)
         .toString("base64");
-      res.json({ path: imgData });
+      res.json({ path: imgPath });
 
     } catch (err) {
       res.status(400).json({ success: false, message: err.message });
