@@ -127,14 +127,15 @@ matchingSituationRouter.get(
     }
   }
 );
-matchingSituationRouter.patch(
-  "/:matchingPostId",
+matchingSituationRouter.post(
+  "/isEvaluate",
   loginRequired,
   async (req, res, next) => {
     try {
       const userId = req.currentUserId;
-      const { matchingPostId } = req.params;
-      const updateInfo = { userId, matchingPostId };
+      const { matchingPostsId } = req.body;
+      console.log(req.body)
+      const updateInfo = { userId, matchingPostsId };
       await matchingSituationService.updateIsEvaluate(updateInfo);
       res.status(200).json({ message: "팀원 평가 여부 수정 성공" });
     } catch (error) {

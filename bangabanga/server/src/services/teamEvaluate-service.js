@@ -1,6 +1,7 @@
 // import { Sequelize } from "sequelize";
 import { TeamEvaluate } from "../db/models";
 import { sequelize } from "../db/index";
+import { QueryTypes } from "sequelize";
 class TeamEvaluateService {
   constructor(model) {
     this.TeamEvaluate = model;
@@ -11,9 +12,9 @@ class TeamEvaluateService {
     return evaluates;
   }
   async getMyShortEvaluate(userId) {
-    const myShortEvaluate = await TeamEvaluate.findAll({
-      where: { evaluateTargetId: userId },
-      attributes: ["evaluateTargetId", "shortEvaluate", "createdAt", "evaluatorId"],
+    const query = `select * from TeamEvaluates A join Users B on A.evaluatorId = B.userId where evaluateTargetId = ${userId}`;
+    const myShortEvaluate = await sequelize.query(query, {
+      type: QueryTypes.SELECT,
     });
     return myShortEvaluate;
   }

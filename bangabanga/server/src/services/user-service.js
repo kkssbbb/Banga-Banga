@@ -85,7 +85,6 @@ class UserService {
 
     return userChanged;
   }
-  // async updateMachingCount()
   async updateMannerScore(userId) {
     const user = await User.findOne({
       where: { userId: userId },

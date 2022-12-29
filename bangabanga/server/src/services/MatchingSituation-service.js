@@ -35,7 +35,7 @@ class MatchingSituationService {
   async getMyFinishedPostsInfo(userId) {
     const query = `select * from MatchingSituation A join MatchingPost B
       on A.matchingPostsId =  B.matchingPostsId join Users C on A.userId = C.userId
-      where A.userId = ${userId} and B.matchStatus = 1 and A.isEvaluate = 0 and A.deletedAt is NULL`;
+      where A.userId = ${userId} and B.matchStatus = 1 and A.deletedAt is NULL`;
     const participants = await sequelize.query(query, {
       type: QueryTypes.SELECT,
     });
@@ -46,7 +46,7 @@ class MatchingSituationService {
   async getMyNotFinishedPostsInfo(userId) {
     const query = `select * from MatchingSituation A join MatchingPost B
       on A.matchingPostsId = B.matchingPostsId join Users C on A.userId = C.userId
-      where A.userId = ${userId} and B.matchStatus = 0 and A.isEvaluate = 0 and A.deletedAt is NULL`;
+      where A.userId = ${userId} and B.matchStatus = 0 and A.deletedAt is NULL`;
     const participants = await sequelize.query(query, {
       type: QueryTypes.SELECT,
     });
@@ -89,9 +89,9 @@ class MatchingSituationService {
   }
   //팀원 평가 완료 시 isEvaluate 상태 변경
   async updateIsEvaluate(updateInfo) {
-    const { userId, matchingPostId } = updateInfo;
+    const { userId, matchingPostsId } = updateInfo;
     const query = `update MatchingSituation set IsEvaluate = 1
-    where userId=${userId} and matchingPostsId=${matchingPostId}`;
+    where userId=${userId} and matchingPostsId=${matchingPostsId}`;
     const participants = await sequelize.query(query, {
       type: QueryTypes.UPDATE,
     });
