@@ -48,8 +48,7 @@ class MapPostService {
 
   //2. 마커클릭했을 떄 옆에 해당 카페에 등록되어있는 모집공고 보여주기 API
   async getCafePosts(cafeId) {
-    const query1 = `      SELECT count(MS.matchingPostsId) as matchingSituationUserSum, P.matchingPostsId, P.title, P.peopleNum ,P.themeName ,P.matchStatus 
-    , P.matchingLocation, P.matchingTime, P.view, P.createdAt, P.updatedAt, P.deletedAt, P.userId
+    const query1 = ` SELECT count(MS.matchingPostsId) as matchingSituationUserSum, P.matchingPostsId, C.cafeName, P.title, P.peopleNum ,P.themeName ,P.matchStatus ,P.matchingLocation, P.matchingTime, P.view, P.createdAt, P.updatedAt, P.deletedAt, P.userId
      FROM MatchingPost P 
      join MatchingSituation MS  on MS.matchingPostsId  = P.matchingPostsId 
      join CafeInformation C ON C.cafeId = P.cafeId
@@ -64,8 +63,8 @@ class MapPostService {
     const cafeInfo = await sequelize.query(query2, {
       type: QueryTypes.SELECT,
     });
-    
-    return [recruitingInfo,cafeInfo];
+
+    return [recruitingInfo, cafeInfo];
   }
 }
 
