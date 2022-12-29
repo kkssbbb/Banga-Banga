@@ -86,7 +86,7 @@ usersRouter.patch("/:userId", loginRequired, async (req, res, next) => {
     // if (!checkPassword) {
     //   throw new Error("비밀번호가 틀렸습니다. 비밀번호를 다시 확인해주세요.");
     // }
-    const userInfoRequired = { userId, checkPassword };
+    const userInfoRequired = { userId };
 
     const updateData = {
       ...(role && { role }),

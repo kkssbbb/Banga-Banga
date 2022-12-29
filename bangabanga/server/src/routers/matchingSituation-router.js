@@ -112,7 +112,7 @@ matchingSituationRouter.get(
   loginRequired,
   async (req, res, next) => {
     try {
-      const { matchingPostsId } = req.params;
+      const matchingPostsId = req.params.matchingPostId;
       const userId = req.currentUserId;
       const participantsInfo = {
         userId,
