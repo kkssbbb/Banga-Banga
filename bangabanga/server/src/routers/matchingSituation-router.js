@@ -102,7 +102,6 @@ matchingSituationRouter.get("/count", loginRequired, async (req, res, next) => {
     // const userId = 3;
     const myPostInfo = await matchingSituationService.getMyPostCount(userId);
     res.status(200).json(myPostInfo);
-    console.log(myPostInfo);
   } catch (error) {
     next(error);
   }
@@ -134,7 +133,6 @@ matchingSituationRouter.post(
     try {
       const userId = req.currentUserId;
       const { matchingPostsId } = req.body;
-      console.log(req.body)
       const updateInfo = { userId, matchingPostsId };
       await matchingSituationService.updateIsEvaluate(updateInfo);
       res.status(200).json({ message: "팀원 평가 여부 수정 성공" });

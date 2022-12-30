@@ -10,7 +10,6 @@ class UserService {
   //회원가입
   async addUser(user) {
     const { userName, mobileNumber, email, nickName, password } = user;
-    console.log(user);
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUserInfo = {
       userName,

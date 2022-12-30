@@ -26,7 +26,6 @@ teamEvaluateRouter.post("/", async (req, res, next) => {
       const score = { mannerEvaluate, escapeEvaluate };
       await userService.updateScore(score, evaluateTargetId);
     });
-    console.log(userId)
     await userService.updateMannerScore(userId);
     res.status(200).json({message : "팀원 평가 완료"});
 

@@ -21,10 +21,7 @@ multerRouter.get("/img", (req, res, next) => {
 
 multerRouter.post("/img-upload", uploader.single("imgFile"), (req, res, next) => {
   try {
-    console.log("업로드 라우터 호출");
-
     const imgPath = `${req.file.path}`;
-    console.log(imgPath);
     const imgData = fs.readFileSync(imgPath).toString("base64");
     res.json({ path: imgPath });
   } catch (err) {
