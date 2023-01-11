@@ -55,7 +55,7 @@
 
     ```bash
     REACT_APP_KAKAOMAP_API_KEY=<카카오맵 api key>
-    REACT_APP_SERVER_URL=<백 서버 url>
+    REACT_APP_SERVER_URL=http://localhost:<서버에서 사용중인 포트 번호>
     ```
 
     백
@@ -67,7 +67,7 @@
         AWS_MYSQL_DATABASE: <AWS RDB DB_name>
         AWS_MYSQL_PASSWORD: <AWS DB password>
         AWS_MYSQL_PORT:<AWS Port>
-        PORT=<vm port> 
+        PORT=<서버실행시 사용할 포트 번호>
     ```
     
 4. express 앱을 실행
