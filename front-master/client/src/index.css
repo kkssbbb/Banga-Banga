@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://webfontworld.github.io/onestore/OneMobilePop.css');
+@import url('https://webfontworld.github.io/SCoreDream/SCoreDream.css');
+
+* {
+  font-family: 'SCoreDream';
+}
+
+body {
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
