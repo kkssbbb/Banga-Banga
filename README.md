@@ -1,6 +1,10 @@
 # 🤗 방가방가 (bang-ga-bang-ga)
-[📎 서비스 링크 이동하기](http://kdt-sw3-team15.elicecoding.com/) <br> <br> <br>
+[📎 서비스 링크 이동하기 (베포 중단) ](http://kdt-sw3-team15.elicecoding.com/) <br> <br> <br>
 [상세한 시현영상,구현기능 보는 링크](https://east-virgo-e1a.notion.site/Banga-Banga-961d365535fa4a84bc1c5c35c4868d40?pvs=4)
+
+ <br>
+  <br>
+  
 ```
 함께 할 친구가 없거나, 난이도 극악인 테마를 깨고싶은데 주변에 방탈출 고수가 없어서 절망했던 경험 있으신가요? 🤔 
 방가방가에서 손쉽게 프로 방탈출러 멤버를 구해보세요! 🧞‍♂️
