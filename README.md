@@ -1,6 +1,9 @@
 # 🤗 방가방가 (bang-ga-bang-ga)
-[📎 서비스 링크 이동하기 (베포 중단) ](http://kdt-sw3-team15.elicecoding.com/) <br> <br> <br>
-[상세한 시현영상,구현기능 보는 링크](https://east-virgo-e1a.notion.site/Banga-Banga-961d365535fa4a84bc1c5c35c4868d40?pvs=4)
+## 상세 시현영상 및 개발 로그
+[상세한 시현영상,구현기능 보는 링크](https://neat-nerine-203.notion.site/Banga-Banga-961d365535fa4a84bc1c5c35c4868d40?pvs=4)
+
+[~~📎 서비스 링크 이동하기 (베포 중단~~ ) ](http://kdt-sw3-team15.elicecoding.com/) <br> <br> <br>
+
 
  <br>
   <br>
